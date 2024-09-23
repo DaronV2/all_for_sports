@@ -1,3 +1,1 @@
-# all_for_sports
-
-A new Flutter project.
+# AP3 - All4Sport (Semestre 3) - Programmation Mobile
