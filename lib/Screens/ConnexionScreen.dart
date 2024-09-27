@@ -15,8 +15,17 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
         appBar: AppBar(
           title: const Text("App"),
         ),
-        body: const Center(
-          child: Text("Page de connexion"),
+        body: Stack(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Entrez votre identifiant : ",
+                contentPadding: EdgeInsets.all(5),
+                border: OutlineInputBorder(),
+              ),
+            )
+          ]
         ),
       ),
     );
