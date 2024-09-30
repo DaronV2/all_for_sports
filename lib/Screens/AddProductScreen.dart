@@ -1,5 +1,5 @@
+import 'package:all_for_sports/Services/Produit.dart';
 import 'package:flutter/material.dart';
-import 'ProductList.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -66,6 +66,13 @@ class _AddProductState extends State<AddProduct> {
                 print('Quantité: $quantite');
                 // Fermer la page actuelle et retourner à la page précédente
                 Navigator.pop(context);
+
+                // Créer un Map pour le JSON
+                Produit Ballon = new Produit(refProduit, entrepot, quantite);
+                Ballon.toJson;
+
+                // Afficher le JSON dans la console
+                print(Ballon.productRef);
               },
               child: const Text('Ajouter le produit'),
             ),
