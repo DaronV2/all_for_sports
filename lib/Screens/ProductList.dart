@@ -1,3 +1,4 @@
+import 'package:all_for_sports/Services/ConvertCode.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -5,6 +6,7 @@ class ProductListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductCodeTransformer.transform("Decathlon");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liste des produits'),
