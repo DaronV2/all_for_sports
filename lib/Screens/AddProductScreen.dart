@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ProductList.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -63,6 +64,8 @@ class _AddProductState extends State<AddProduct> {
                 print('Référence du produit: $refProduit');
                 print('Entrepôt: $entrepot');
                 print('Quantité: $quantite');
+                // Fermer la page actuelle et retourner à la page précédente
+                Navigator.pop(context);
               },
               child: const Text('Ajouter le produit'),
             ),
