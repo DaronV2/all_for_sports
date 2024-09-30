@@ -1,8 +1,8 @@
-import 'package:all_for_sports/screens/ConnexionScreen.dart';
+import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const ConnexionScreen());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -10,6 +10,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return MaterialApp(
+      title: 'ALL4SPORT App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const AddProduct(), // Affiche directement de AddProduct
+    );
   }
 }
