@@ -1,39 +1,5 @@
 import 'package:flutter/material.dart';
 
-class ProductListScreen extends StatelessWidget {
-  const ProductListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Liste des produits'),
-      ),
-      body: Center(
-        child: const Column(
-          children: [
-            ProductItem(
-              reference: 'REF123',
-              name: 'Produit 1',
-              quantity: 10,
-            ),
-            ProductItem(
-              reference: 'REF456',
-              name: 'Produit 2',
-              quantity: 25,
-            ),
-            ProductItem(
-              reference: 'REF789',
-              name: 'Produit 3',
-              quantity: 5,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ProductItem extends StatelessWidget {
   final String reference;
   final String name;
