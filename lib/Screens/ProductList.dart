@@ -6,25 +6,27 @@ class ProductListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductCodeTransformer.transform("Decathlon");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liste des produits'),
       ),
       body: Center(
-        child: const Column(
-          children: [
+        child: Column(
+          children: const [
             ProductItem(
+              supplierName: 'Decathlon', // Utiliser le nom du fournisseur ici
               reference: 'REF123',
               name: 'Produit 1',
               quantity: 10,
             ),
             ProductItem(
+              supplierName: 'Nike', // Un autre exemple de fournisseur
               reference: 'REF456',
               name: 'Produit 2',
               quantity: 25,
             ),
             ProductItem(
+              supplierName: 'Adidas',
               reference: 'REF789',
               name: 'Produit 3',
               quantity: 5,
@@ -37,12 +39,14 @@ class ProductListScreen extends StatelessWidget {
 }
 
 class ProductItem extends StatelessWidget {
+  final String supplierName;
   final String reference;
   final String name;
   final int quantity;
 
   const ProductItem({
     super.key,
+    required this.supplierName,
     required this.reference,
     required this.name,
     required this.quantity,
@@ -50,6 +54,9 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Utiliser la méthode transform pour générer le code fournisseur à partir de la référence
+    String supplierProductCode = ProductCodeTransformer.transform(supplierName);
+
     return Card(
       margin: const EdgeInsets.all(10.0),
       child: Padding(
@@ -57,9 +64,12 @@ class ProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Référence : $reference',
+            // Affichage de la référence (code fournisseur transformé)
+            Text('Référence produit : $supplierProductCode',
                 style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text('Nom : $name'),
+            // Affichage du nom (désignation du produit)
+            Text('Désignation : $name'),
+            // Affichage de la quantité en stock
             Text('Quantité en stock : $quantity'),
           ],
         ),

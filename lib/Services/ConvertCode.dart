@@ -13,7 +13,6 @@ class ProductCodeTransformer {
     'Reebok': 'Ree',
     'Asics': 'Asi',
     'Salomon': 'Sal',
-    // Ajoutez d'autres fournisseurs ici si nécessaire
   };
 
   // Méthode pour transformer le code client en code fournisseur
