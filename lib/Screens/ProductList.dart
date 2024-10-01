@@ -1,5 +1,7 @@
 import 'package:all_for_sports/Services/ConvertCode.dart';
 import 'package:flutter/material.dart';
+import 'package:all_for_sports/Screens/FlashQRCodeScreen.dart';
+import 'package:all_for_sports/Screens/AddProductScreen.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
@@ -10,29 +12,52 @@ class ProductListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Liste des produits'),
       ),
-      body: Center(
-        child: Column(
-          children: const [
-            ProductItem(
-              supplierName: 'Decathlon', // Utiliser le nom du fournisseur ici
-              reference: 'REF123',
-              name: 'Produit 1',
-              quantity: 10,
+      body: Stack(
+        children: [
+          // Liste des produits affichée au centre
+          Center(
+            child: Column(
+              children: const [
+                ProductItem(
+                  supplierName:
+                      'Decathlon', // Utiliser le nom du fournisseur ici
+                  reference: 'REF123',
+                  name: 'Produit 1',
+                  quantity: 10,
+                ),
+                ProductItem(
+                  supplierName: 'Nike', // Un autre exemple de fournisseur
+                  reference: 'REF456',
+                  name: 'Produit 2',
+                  quantity: 25,
+                ),
+                ProductItem(
+                  supplierName: 'Adidas',
+                  reference: 'REF789',
+                  name: 'Produit 3',
+                  quantity: 5,
+                ),
+              ],
             ),
-            ProductItem(
-              supplierName: 'Nike', // Un autre exemple de fournisseur
-              reference: 'REF456',
-              name: 'Produit 2',
-              quantity: 25,
+          ),
+          // Bouton "+" en bas à droite
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                // Ouvrir l'écran d'ajout de produit
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((BuildContext context) => const AddProductScreen()),
+                ));
+              },
+              child: const Icon(Icons.add,
+                  size: 40), // Taille de l'icône plus grande
+              backgroundColor: Colors.blue,
+              tooltip: 'Ajouter un produit',
             ),
-            ProductItem(
-              supplierName: 'Adidas',
-              reference: 'REF789',
-              name: 'Produit 3',
-              quantity: 5,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
