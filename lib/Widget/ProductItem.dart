@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatelessWidget {
+  final String supplierName;
   final String reference;
   final String name;
   final int quantity;
 
   const ProductItem({
     super.key,
+    required this.supplierName,
     required this.reference,
     required this.name,
     required this.quantity,
