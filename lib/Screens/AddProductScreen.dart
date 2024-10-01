@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:all_for_sports/Services/Produit.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:all_for_sports/Services/Api.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -61,7 +62,7 @@ class _AddProductState extends State<AddProduct> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Action à effectuer lors de la soumission du formulaire
                 print('Référence du produit: $refProduit');
                 print('Entrepôt: $entrepot');
@@ -73,6 +74,18 @@ class _AddProductState extends State<AddProduct> {
                 Produit Ballon = Produit(refProduit, entrepot, quantite);
                 String JasonBallon = jsonEncode(Ballon.toJson());
                 print(JasonBallon);
+
+                //Appele de méthode pour envoyer le produit à l'API, et stokage de la valeur dans la variable Réponse de l'API
+                String reponseDeAPI = await Api.sendProductToApi(JasonBallon);
+
+                // Affichage d'une SnackBar avec la réponse de l'API
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(reponseDeAPI),
+                    duration: const Duration(
+                        seconds: 3), // Durée d'affichage de la SnackBar
+                  ),
+                );
               },
               child: const Text('Ajouter le produit'),
             ),
