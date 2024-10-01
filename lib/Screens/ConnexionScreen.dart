@@ -1,6 +1,7 @@
 import 'dart:convert';
-
-import 'package:all_for_sports/Services/SerializeLogs.dart';
+import 'package:all_for_sports/Screens/ProductListScreen.dart';
+import 'package:all_for_sports/services/ConnexionTemp.dart';
+import 'package:all_for_sports/services/SerializeLogs.dart';
 import 'package:flutter/material.dart';
 
 class ConnexionScreen extends StatefulWidget {
@@ -11,7 +12,6 @@ class ConnexionScreen extends StatefulWidget {
 }
 
 class _ConnexionScreenState extends State<ConnexionScreen> {
-
   bool _passwordHidden = true;
 
   final TextEditingController _controllerId = TextEditingController();
@@ -20,6 +20,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   @override
   void initState() {
+    super.initState();
     _passwordHidden = true;
     // TODO: implement initState
     // super.initState();
@@ -57,15 +58,19 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               icon: Icon(Icons.password),
               hintText: "Entrez votre Mot de passe : ",
             ),
-            // onChanged: (_controllerPassword) {
-            //   print(_controllerPassword);
-            // },
           ),
           ElevatedButton(
             onPressed: () {
-              SerializeLogs logs = SerializeLogs(_controllerId.text, _controllerPassword.text);
-              String jsonString = jsonEncode(logs.toJson());
-              print(jsonString);
+              SerializeLogs logs =
+                  SerializeLogs(_controllerId.text, _controllerPassword.text);
+              // String jsonString = jsonEncode(logs.toJson());
+              if (Connexiontemp.checkLogs(logs.id, logs.password)) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((BuildContext context) => ProductListScreen()),
+                ));
+              } else {
+              
+              }
             },
             child: const Text("Connecter"),
           ),
