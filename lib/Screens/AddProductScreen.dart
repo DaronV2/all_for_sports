@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:all_for_sports/Services/Produit.dart';
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -68,11 +70,9 @@ class _AddProductState extends State<AddProduct> {
                 Navigator.pop(context);
 
                 // Créer un Map pour le JSON
-                Produit Ballon = new Produit(refProduit, entrepot, quantite);
-                Ballon.toJson;
-
-                // Afficher le JSON dans la console
-                print(Ballon.productRef);
+                Produit Ballon = Produit(refProduit, entrepot, quantite);
+                String JasonBallon = jsonEncode(Ballon.toJson());
+                print(JasonBallon);
               },
               child: const Text('Ajouter le produit'),
             ),
