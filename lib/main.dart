@@ -1,4 +1,4 @@
-import 'package:all_for_sports/Screens/ProductList.dart';
+import 'package:all_for_sports/Screens/ConnexionScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home:
-          const ProductListScreen(), // Affiche directement la liste des produits
+          const ConnexionScreen(), // Affiche directement la liste des produits
     );
   }
 }
