@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
   // Méthode pour envoyer le produit à l'API
   static Future<String> sendProductToApi(String CodeJsonPourAPI) async {
-    var url = Uri.parse('https://API'); // URL de l'API
+    /* var url = Uri.parse('https://API'); // URL de l'API
 
     try {
       var response = await http.post(
@@ -26,6 +27,19 @@ class Api {
     } catch (e) {
       print('Erreur lors de l\'envoi du produit: $e');
       String message = 'Erreur lors de l\'envoi du produit: $e';
+      return message;
+    }
+  } */
+
+    String message = 'Voiture';
+    if (message == 'Voiture') {
+      message = 'OK';
+      return message;
+    } else if (message == 'Bateau') {
+      message = 'Probléme d\'enregistrement';
+      return message;
+    } else {
+      message = 'Probléme inconnu';
       return message;
     }
   }

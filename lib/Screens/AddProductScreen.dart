@@ -67,8 +67,6 @@ class _AddProductState extends State<AddProduct> {
                 print('Référence du produit: $refProduit');
                 print('Entrepôt: $entrepot');
                 print('Quantité: $quantite');
-                // Fermer la page actuelle et retourner à la page précédente
-                Navigator.pop(context);
 
                 // Créer un Map pour le JSON
                 Produit Ballon = Produit(refProduit, entrepot, quantite);
@@ -83,7 +81,7 @@ class _AddProductState extends State<AddProduct> {
                   SnackBar(
                     content: Text(reponseDeAPI),
                     duration: const Duration(
-                        seconds: 3), // Durée d'affichage de la SnackBar
+                        seconds: 5), // Durée d'affichage de la SnackBar
                   ),
                 );
               },
