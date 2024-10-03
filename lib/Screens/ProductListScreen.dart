@@ -8,11 +8,9 @@ class ProductListScreen extends StatefulWidget {
 
   @override
   State<ProductListScreen> createState() => _ProductListScreen();
-
 }
 
-class _ProductListScreen extends State<ProductListScreen>{
-
+class _ProductListScreen extends State<ProductListScreen> {
   List<ProductItem> listeProd = [];
 
   @override
@@ -24,12 +22,10 @@ class _ProductListScreen extends State<ProductListScreen>{
   Future<void> loadList() async {
     listeProd = await FillProductList.loadProductList();
     print("los datas ");
-    listeProd.forEach((data){
+    listeProd.forEach((data) {
       print(data);
     });
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   //TODO changer la column afin de la rendre flexible avec barre de scroll
@@ -45,25 +41,31 @@ class _ProductListScreen extends State<ProductListScreen>{
         title: const Text('Liste des produits'),
       ),
       body: Center(
-        child: Column(
-          children: 
-          listeProd,
-          // ProductItem(
-          //   reference: 'REF123',
-          //   name: 'Produit 1',
-          //   quantity: 10,
-          // ),
-          // ProductItem(
-          //   reference: 'REF456',
-          //   name: 'Produit 2',
-          //   quantity: 25,
-          // ),
-          // ProductItem(
-          //   reference: 'REF789',
-          //   name: 'Produit 3',
-          //   quantity: 5,
-          // ),
-        ),
+        child: Stack(children: [
+          Column(
+            children: listeProd,
+          ),
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                // Ouvrir l'écran d'ajout de produit
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const AddProductScreen(),
+                  ),
+                );
+              },
+              child: const Icon(
+                Icons.add,
+                size: 40, // Taille de l'icône plus grande
+              ),
+              backgroundColor: Colors.blue,
+              tooltip: 'Ajouter un produit',
+            ),
+          ),
+        ]),
       ),
     );
   }
