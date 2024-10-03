@@ -6,7 +6,6 @@ class ProductItem extends StatelessWidget {
   final int quantity;
 
   const ProductItem({
-    super.key,
     required this.reference,
     required this.name,
     required this.quantity,
