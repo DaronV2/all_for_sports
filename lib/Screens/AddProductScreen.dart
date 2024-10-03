@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:all_for_sports/Services/Produit.dart';
+import 'package:all_for_sports/Services/Provides.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:all_for_sports/Services/Api.dart';
+import 'package:provider/provider.dart';
+import 'package:all_for_sports/Services/Provides.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -13,8 +16,6 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
   late String refProduit;
-  String entrepot =
-      'Lyon'; // Valeur déjà sur Lyon reçue de Géolocalisation si fonctionnelle
   late int quantite;
   // Contrôleurs pour les TextField
   final TextEditingController refProduitController =
@@ -24,6 +25,8 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    // Récupération de l'entrepôt grâce au provider
+    String entrepot = Provider.of<EntrepotProvider>(context).entrepot;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajouter un produit'),
