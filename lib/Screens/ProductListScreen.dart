@@ -1,30 +1,41 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:all_for_sports/services/FillProductList.dart';
-import 'package:all_for_sports/services/Product.dart';
+import 'package:all_for_sports/Services/FillProductList.dart';
 import 'package:flutter/material.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
 
-class ProductListScreen extends StatelessWidget {
+class ProductListScreen extends StatefulWidget {
   ProductListScreen({super.key});
 
-  final List<ProductItem> listeProd = [
-    const ProductItem(
-      reference: 'REF123',
-      name: 'Produit 1',
-      quantity: 10,
-    ),
-    const ProductItem(
-      reference: 'REF456',
-      name: 'Produit 2',
-      quantity: 25,
-    ),
-    const ProductItem(
-      reference: 'REF789',
-      name: 'Produit 3',
-      quantity: 5,
-    ),
-  ];
+  @override
+  State<ProductListScreen> createState() => _ProductListScreen();
+
+}
+
+class _ProductListScreen extends State<ProductListScreen>{
+
+  List<ProductItem> listeProd = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadList();
+  }
+
+  Future<void> loadList() async {
+    listeProd = await FillProductList.loadProductList();
+    print("los datas ");
+    listeProd.forEach((data){
+      print(data);
+    });
+    setState(() {
+      
+    });
+  }
+
+  //TODO changer la column afin de la rendre flexible avec barre de scroll
+
+  Future<void> loadProducts() async {
+    await FillProductList.loadProductList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +45,8 @@ class ProductListScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          children: listeProd
+          children: 
+          listeProd,
           // ProductItem(
           //   reference: 'REF123',
           //   name: 'Produit 1',
@@ -50,7 +62,6 @@ class ProductListScreen extends StatelessWidget {
           //   name: 'Produit 3',
           //   quantity: 5,
           // ),
-          ,
         ),
       ),
     );
