@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:all_for_sports/Services/Provides.dart';
 import 'package:provider/provider.dart';
+import 'package:all_for_sports/Screens/EntrepotSelectionScreen.dart';
 
 // Widget d'état, car la position peut changer au fil du temps
 class LocationPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _LocationPageState extends State<LocationPage> {
   String _locationMessage = "Récupération de la position...";
   // Variable pour stocker l'entrepôt le plus proche
   String? _nearbyWarehouse;
+  String? _selectedWarehouse;
 
   // Getter pour accéder à l'entrepôt le plus proche
   String? get nearbyWarehouse => _nearbyWarehouse;
@@ -58,6 +60,9 @@ class _LocationPageState extends State<LocationPage> {
       setState(() {
         _locationMessage =
             "Les permissions de localisation sont définitivement refusées.";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+        ));
       });
       return;
     }
