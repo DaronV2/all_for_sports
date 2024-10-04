@@ -1,8 +1,8 @@
 import 'package:all_for_sports/Screens/AccueilScreen.dart';
 import 'package:all_for_sports/Screens/AddProductScreen.dart';
-import 'package:all_for_sports/Screens/ChoosingAWarehouse.dart';
+import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/Screens/ConnexionScreen.dart';
-import 'package:all_for_sports/Screens/ChoosingAWarehouse.dart';
+import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/Services/Provides.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
