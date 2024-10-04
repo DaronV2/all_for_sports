@@ -54,7 +54,7 @@ class _ProductListScreen extends State<ProductListScreen> {
                 // Ouvrir l'écran d'ajout de produit
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const AddProductScreen(),
+                    builder: (BuildContext context) => const AddProduct(),
                   ),
                 );
               },

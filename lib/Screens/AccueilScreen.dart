@@ -32,7 +32,8 @@ class AccDart extends StatelessWidget {
                 // Navigation vers la Page Liste Produit
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AddProduct()),
+                  MaterialPageRoute(
+                      builder: (context) => const FlashQRCodeScreen()),
                 );
               },
               child: const Text('Aller à la PageQRCode'),

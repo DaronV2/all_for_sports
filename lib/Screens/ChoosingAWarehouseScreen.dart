@@ -82,7 +82,7 @@ class _LocationPageState extends State<LocationPage> {
       );
 
       // Vérifier si la distance est inférieure à 2000 mètres (2 km)
-      if (distanceInMeters < 2000) {
+      if (distanceInMeters < 10000) {
         nearbyWarehouse = warehouse["city"]; // Récupérer le nom de l'entrepôt
         break; // On sort de la boucle une fois qu'on a trouvé un entrepôt proche
       }
