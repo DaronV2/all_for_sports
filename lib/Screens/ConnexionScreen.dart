@@ -68,7 +68,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               // String jsonString = jsonEncode(logs.toJson());
               if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((BuildContext context) => const LocationPage()),
+                  builder: ((BuildContext context) => const AccDart()),
                 ));
               } else {
                 // Si la connexion échoue, afficher une SnackBar

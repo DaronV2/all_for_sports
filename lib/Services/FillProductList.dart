@@ -21,10 +21,9 @@ class FillProductList {
   static List<ProductItem> transformProductListToProductItem(ProductList prodList){
     List<ProductItem> list =[];
     prodList.productList.forEach((prod){
-      ProductItem item = ProductItem(supplierName: prod.productSupplier, reference: prod.productReference, name: prod.productSupplier, quantity: prod.quantity);
+      ProductItem item = ProductItem(reference: prod.productReference, name: prod.description, quantity: prod.quantity, addingDate: prod.addingDate,);
       list.add(item);
     });
     return list;
   }
-//Faire api enft pcq impossible lire fichier
 }
