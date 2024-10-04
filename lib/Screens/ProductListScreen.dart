@@ -1,27 +1,9 @@
-import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:all_for_sports/Screens/FlashQRCodeScreen.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
 
 class ProductListScreen extends StatelessWidget {
-  ProductListScreen({super.key});
-
-  final List<ProductItem> listeProd = [
-    // const ProductItem(
-    //   reference: 'REF123',
-    //   name: 'Produit 1',
-    //   quantity: 10,
-    // ),
-    // const ProductItem(
-    //   reference: 'REF456',
-    //   name: 'Produit 2',
-    //   quantity: 25,
-    // ),
-    // const ProductItem(
-    //   reference: 'REF789',
-    //   name: 'Produit 3',
-    //   quantity: 5,
-    // ),
-  ];
+  const ProductListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +18,13 @@ class ProductListScreen extends StatelessWidget {
             child: Column(
               children: [
                 ProductItem(
-                  supplierName:
-                      'Decathlon', // Utiliser le nom du fournisseur ici
+                  supplierName: 'Decathlon',
                   reference: 'REF123',
                   name: 'Produit 1',
                   quantity: 10,
                 ),
                 ProductItem(
-                  supplierName: 'Nike', // Un autre exemple de fournisseur
+                  supplierName: 'Nike',
                   reference: 'REF456',
                   name: 'Produit 2',
                   quantity: 25,
@@ -63,15 +44,14 @@ class ProductListScreen extends StatelessWidget {
             right: 20.0,
             child: FloatingActionButton(
               onPressed: () {
-                // Ouvrir l'écran d'ajout de produit
+                // Ouvrir la page de scan QR code
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((BuildContext context) => const AddProductScreen()),
+                  builder: (BuildContext context) => const FlashQRCodeScreen(),
                 ));
               },
-              child: const Icon(Icons.add,
-                  size: 40), // Taille de l'icône plus grande
+              child: const Icon(Icons.add, size: 40),
               backgroundColor: Colors.blue,
-              tooltip: 'Ajouter un produit',
+              tooltip: 'Scanner un produit',
             ),
           ),
         ],
