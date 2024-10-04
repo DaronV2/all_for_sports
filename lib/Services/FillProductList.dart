@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:all_for_sports/Widget/ProductItem.dart';
-import 'package:flutter/foundation.dart'; 
-import 'package:all_for_sports/Services/Product.dart';
 import 'package:all_for_sports/Services/Api.dart';
 import 'package:all_for_sports/Services/ProductList.dart';
-import 'package:http/http.dart' as http; // https://docs.flutter.dev/cookbook/networking/fetch-data
 
 class FillProductList {
 

@@ -1,4 +1,3 @@
-import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:flutter/material.dart';
 import 'FlashQRCodeScreen.dart';
 import 'ProductListScreen.dart';
