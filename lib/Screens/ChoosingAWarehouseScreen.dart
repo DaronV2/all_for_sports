@@ -82,7 +82,7 @@ class _LocationPageState extends State<LocationPage> {
       );
 
       // Vérifier si la distance est inférieure à 2000 mètres (2 km)
-      if (distanceInMeters < 2000) {
+      if (distanceInMeters < 4000) {
         nearbyWarehouse = warehouse["city"]; // Récupérer le nom de l'entrepôt
         break; // On sort de la boucle une fois qu'on a trouvé un entrepôt proche
       }
@@ -98,7 +98,7 @@ class _LocationPageState extends State<LocationPage> {
         Provider.of<EntrepotProvider>(context, listen: false)
             .setEntrepot(nearbyWarehouse);
       } else {
-        _locationMessage = "Aucun entrepôt à moins de 2 km.";
+        _locationMessage = "Aucun entrepôt à moins de 4 km.";
       }
     });
   }

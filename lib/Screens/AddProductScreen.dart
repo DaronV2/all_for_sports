@@ -7,14 +7,14 @@ import 'package:all_for_sports/Services/Api.dart';
 import 'package:provider/provider.dart';
 import 'package:all_for_sports/Services/Provides.dart';
 
-class AddProduct extends StatefulWidget {
-  const AddProduct({super.key});
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({super.key});
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _AddProductScreenState extends State<AddProductScreen> {
   late String refProduit;
   late int quantite;
   // Contrôleurs pour les TextField
@@ -77,7 +77,7 @@ class _AddProductState extends State<AddProduct> {
                 print(JasonBallon);
 
                 //Appele de méthode pour envoyer le produit à l'API, et stokage de la valeur dans la variable Réponse de l'API
-                String reponseDeAPI = await Api.sendProductToApi(JasonBallon);
+                String reponseDeAPI = Api.extractProductReference(JasonBallon);
 
                 // Affichage d'une SnackBar avec la réponse de l'API
                 ScaffoldMessenger.of(context).showSnackBar(

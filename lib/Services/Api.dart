@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart'; // https://docs.flutter.dev/cookbook/networking/fetch-data
+import 'dart:convert'; // Pour utiliser jsonDecode
 
 class Api {
   static Future<Response> fetchApi(String apiPage) async {
@@ -7,45 +8,27 @@ class Api {
     return await http.get(url);
   }
 
-  // Méthode pour envoyer le produit à l'API
-  static Future<String> sendProductToApi(String CodeJsonPourAPI) async {
-    /* var url = Uri.parse('https://API'); // URL de l'API
+  // Méthode pour extraire la référence du produit à partir du JSON
+  static String extractProductReference(String codeJsonPourAPI) {
+    // Décodage du JSON pour obtenir la map des données
+    Map<String, dynamic> productData = jsonDecode(codeJsonPourAPI);
 
-    try {
-      var response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: CodeJsonPourAPI,
-      );
+    // Extraction de la référence du produit
+    String productReference = productData['productRef'];
 
-      if (response.statusCode == 200) {
-        print('Produit ajouté avec succès');
-        String message = 'Produit ajouté avec succès';
-        return message;
-      } else {
-        print('Erreur: ${response.statusCode}');
-        String message = 'Erreur: ${response.statusCode}';
-        return message;
-      }
-    } catch (e) {
-      print('Erreur lors de l\'envoi du produit: $e');
-      String message = 'Erreur lors de l\'envoi du produit: $e';
-      return message;
-    }
-  } */
+    String messageErreur = 'OK';
 
-    String message = 'Voiture';
-    if (message == 'Voiture') {
-      message = 'OK';
-      return message;
-    } else if (message == 'Bateau') {
-      message = 'Probléme d\'enregistrement';
-      return message;
+    if (productReference == "DECSPO124d48f1h9t1") {
+      messageErreur = 'Erreur De Connexion';
+      return messageErreur;
+    } else if (productReference == "DECSPO124d48f1h9t2") {
+      messageErreur = 'Produit Inexistant';
+      return messageErreur;
+    } else if (productReference == "DECSPO124d48f1h9t3") {
+      messageErreur = 'Erreur lors de la connexion';
+      return messageErreur;
     } else {
-      message = 'Probléme inconnu';
-      return message;
+      return messageErreur;
     }
   }
 }
