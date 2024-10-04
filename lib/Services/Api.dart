@@ -1,12 +1,51 @@
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart'; // https://docs.flutter.dev/cookbook/networking/fetch-data
 
-
 class Api {
-
   static Future<Response> fetchApi(String apiPage) async {
     var url = Uri.http('127.0.0.1:30000', apiPage);
     return await http.get(url);
   }
 
+  // Méthode pour envoyer le produit à l'API
+  static Future<String> sendProductToApi(String CodeJsonPourAPI) async {
+    /* var url = Uri.parse('https://API'); // URL de l'API
+
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: CodeJsonPourAPI,
+      );
+
+      if (response.statusCode == 200) {
+        print('Produit ajouté avec succès');
+        String message = 'Produit ajouté avec succès';
+        return message;
+      } else {
+        print('Erreur: ${response.statusCode}');
+        String message = 'Erreur: ${response.statusCode}';
+        return message;
+      }
+    } catch (e) {
+      print('Erreur lors de l\'envoi du produit: $e');
+      String message = 'Erreur lors de l\'envoi du produit: $e';
+      return message;
+    }
+  } */
+
+    String message = 'Voiture';
+    if (message == 'Voiture') {
+      message = 'OK';
+      return message;
+    } else if (message == 'Bateau') {
+      message = 'Probléme d\'enregistrement';
+      return message;
+    } else {
+      message = 'Probléme inconnu';
+      return message;
+    }
+  }
 }

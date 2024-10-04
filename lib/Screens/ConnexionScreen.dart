@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:all_for_sports/Screens/AccueilScreen.dart';
+import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/Screens/ProductListScreen.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
@@ -66,10 +68,16 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               // String jsonString = jsonEncode(logs.toJson());
               if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((BuildContext context) => ProductListScreen()),
+                  builder: ((BuildContext context) => const LocationPage()),
                 ));
               } else {
-              
+                // Si la connexion échoue, afficher une SnackBar
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Connexion échouée'),
+                    duration: Duration(seconds: 3),
+                  ),
+                );
               }
             },
             child: const Text("Connecter"),
