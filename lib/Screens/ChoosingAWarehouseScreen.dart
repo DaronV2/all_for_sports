@@ -98,7 +98,7 @@ class _LocationPageState extends State<LocationPage> {
         Provider.of<EntrepotProvider>(context, listen: false)
             .setEntrepot(nearbyWarehouse);
       } else {
-        _locationMessage = "Aucun entrepôt à moins de 2 km.";
+        _locationMessage = "Aucun entrepôt à moins de 4 km.";
       }
     });
   }
