@@ -1,4 +1,5 @@
 import 'package:all_for_sports/Screens/AddProductScreen.dart';
+import 'package:all_for_sports/Screens/FlashQRCodeScreen.dart';
 import 'package:all_for_sports/Services/FillProductList.dart';
 import 'package:flutter/material.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
@@ -53,7 +54,7 @@ class _ProductListScreen extends State<ProductListScreen> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          const AddProductScreen(),
+                          const FlashQRCodeScreen(),
                     ),
                   );
                 },
