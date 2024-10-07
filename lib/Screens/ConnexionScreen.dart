@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:all_for_sports/Screens/AccueilScreen.dart';
-import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
-import 'package:all_for_sports/Screens/ProductListScreen.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
 import 'package:flutter/material.dart';

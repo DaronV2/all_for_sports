@@ -13,6 +13,7 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? refProduitQrCode = '';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scanner un produit'),
@@ -28,6 +29,8 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                   setState(() {
                     scanResult = barcode
                         .rawValue; // Utiliser rawValue pour obtenir la valeur du QR code
+                    refProduitQrCode = scanResult;
+                    print(refProduitQrCode);
                   });
                 }
               },

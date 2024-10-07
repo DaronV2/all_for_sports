@@ -28,12 +28,6 @@ class _ProductListScreen extends State<ProductListScreen> {
     setState(() {});
   }
 
-  //TODO changer la column afin de la rendre flexible avec barre de scroll
-
-  Future<void> loadProducts() async {
-    await FillProductList.loadProductList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,31 +35,38 @@ class _ProductListScreen extends State<ProductListScreen> {
         title: const Text('Liste des produits'),
       ),
       body: Center(
-        child: Stack(children: [
-          Column(
-            children: listeProd,
-          ),
-          Positioned(
-            bottom: 20.0,
-            right: 20.0,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Ouvrir l'écran d'ajout de produit
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const AddProductScreen(),
-                  ),
-                );
+        child: Stack(
+          children: [
+            // Utilisation de ListView.builder pour le défilement infini
+            ListView.builder(
+              itemCount: listeProd.length,
+              itemBuilder: (context, index) {
+                return listeProd[index]; // Affiche chaque produit
               },
-              child: const Icon(
-                Icons.add,
-                size: 40, // Taille de l'icône plus grande
-              ),
-              backgroundColor: Colors.blue,
-              tooltip: 'Scanner un produit',
             ),
-          ),
-        ]),
+            Positioned(
+              bottom: 20.0,
+              right: 20.0,
+              child: FloatingActionButton(
+                onPressed: () {
+                  // Ouvrir l'écran d'ajout de produit
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const AddProductScreen(),
+                    ),
+                  );
+                },
+                child: const Icon(
+                  Icons.add,
+                  size: 40, // Taille de l'icône plus grande
+                ),
+                backgroundColor: Colors.blue,
+                tooltip: 'Ajouter un produit',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
