@@ -39,6 +39,9 @@ class _LocationPageState extends State<LocationPage> {
     if (!serviceEnabled) {
       setState(() {
         _locationMessage = "Le Service de localisation ne fonctionne pas !";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+        ));
       });
       return;
     }
@@ -51,6 +54,9 @@ class _LocationPageState extends State<LocationPage> {
         setState(() {
           _locationMessage =
               "La localisation de votre position n'est pas autorisée.";
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: ((BuildContext context) => EntrepotSelectionScreen()),
+          ));
         });
         return;
       }
