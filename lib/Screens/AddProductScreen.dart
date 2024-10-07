@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:all_for_sports/Services/Produit.dart';
 import 'package:all_for_sports/Services/Provides.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:all_for_sports/Services/Api.dart';
 import 'package:provider/provider.dart';
-import 'package:all_for_sports/Services/Provides.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
