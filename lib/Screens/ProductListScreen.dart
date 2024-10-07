@@ -30,10 +30,6 @@ class _ProductListScreen extends State<ProductListScreen> {
 
   //TODO changer la column afin de la rendre flexible avec barre de scroll
 
-  Future<void> loadProducts() async {
-    await FillProductList.loadProductList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
