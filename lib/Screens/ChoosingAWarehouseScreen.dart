@@ -104,6 +104,9 @@ class _LocationPageState extends State<LocationPage> {
             .setEntrepot(nearbyWarehouse);
       } else {
         _locationMessage = "Aucun entrepôt à moins de 4 km.";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+        ));
       }
     });
   }
