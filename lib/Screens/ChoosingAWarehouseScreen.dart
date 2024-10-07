@@ -17,7 +17,7 @@ class _LocationPageState extends State<LocationPage> {
   String _locationMessage = "Récupération de la position...";
   // Variable pour stocker l'entrepôt le plus proche
   String? _nearbyWarehouse;
-  String? _selectedWarehouse;
+  // String? _selectedWarehouse;
 
   // Getter pour accéder à l'entrepôt le plus proche
   String? get nearbyWarehouse => _nearbyWarehouse;

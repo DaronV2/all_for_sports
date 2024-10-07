@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:provider/provider.dart';
+import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Screens/AddProductScreen.dart';
 
 class FlashQRCodeScreen extends StatefulWidget {
   const FlashQRCodeScreen({super.key});
@@ -29,8 +32,12 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                   setState(() {
                     scanResult = barcode
                         .rawValue; // Utiliser rawValue pour obtenir la valeur du QR code
-                    refProduitQrCode = scanResult;
-                    print(refProduitQrCode);
+                    // Mettre à jour la valeur dans le Provider
+                    if (scanResult != null) {
+                      context
+                          .read<EntrepotProvider>()
+                          .setRefProduit(scanResult!);
+                    }
                   });
                 }
               },
@@ -45,6 +52,20 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                     : 'Scannez un QR code',
               ),
             ),
+          ),
+
+          const SizedBox(height: 20),
+          // Bouton pour aller sur la page AddProduct
+          ElevatedButton(
+            onPressed: () {
+              // Navigation vers la page AddProductScreen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AddProductScreen()),
+              );
+            },
+            child: const Text('Ajouter un produit'),
           ),
         ],
       ),
