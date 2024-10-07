@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:all_for_sports/Screens/AccueilScreen.dart';
-import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
-import 'package:all_for_sports/Screens/ProductListScreen.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +35,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String messageSnackBar = "";
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -61,26 +59,35 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               hintText: "Entrez votre Mot de passe : ",
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              SerializeLogs logs =
-                  SerializeLogs(_controllerId.text, _controllerPassword.text);
-              // String jsonString = jsonEncode(logs.toJson());
-              if (Connexiontemp.checkLogs(logs.id, logs.password)) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((BuildContext context) => const LocationPage()),
-                ));
-              } else {
-                // Si la connexion échoue, afficher une SnackBar
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Connexion échouée'),
-                    duration: Duration(seconds: 3),
-                  ),
-                );
-              }
+          Builder(
+            builder: (BuildContext context) {
+              return ElevatedButton(
+                onPressed: () {
+                  messageSnackBar = "";
+                  SerializeLogs logs = SerializeLogs(
+                      _controllerId.text, _controllerPassword.text);
+                  // String jsonString = jsonEncode(logs.toJson());
+                  if (Connexiontemp.checkLogs(logs.id, logs.password)) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((BuildContext context) => const AccDart()),
+                    ));
+                  } else {
+                    if (!Connexiontemp.checkLogin(logs.id)) {
+                      messageSnackBar += "Login incorrect ";
+                    }
+                    if (!Connexiontemp.checkPassword(logs.password)) {
+                      messageSnackBar += "Mot de passe Incorrect.";
+                    }
+                    // Si la connexion échoue, afficher une SnackBar
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(messageSnackBar),
+                      // duration: Duration(seconds: 3),
+                    ));
+                  }
+                },
+                child: const Text("Connecter"),
+              );
             },
-            child: const Text("Connecter"),
           ),
         ]),
       ),

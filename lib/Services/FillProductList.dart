@@ -14,8 +14,10 @@ class FillProductList {
       return transformProductListToProductItem(productList);
     } on Exception catch (e) {
       print(e);
+      result.add(const ProductItem(reference: "noFetchableApi", name: "noFetchableApi", quantity: 0, addingDate: "04/10/2024"));
+      print("reel");
+      return result;
     }
-    return result;
   }
 
   static List<ProductItem> transformProductListToProductItem(ProductList prodList){

@@ -16,4 +16,26 @@ class Connexiontemp {
     return res;
   }
 
+  static bool checkLogin(String login){
+    bool res = false;
+    logs.forEach((key, value){
+      if (login == key){
+        res = true;
+        return;
+      }
+    });
+    return res;
+  }
+
+  static bool checkPassword(String pwd){
+    bool res = false;
+    logs.forEach((key, value){
+      if (pwd == value){
+        res = true;
+        return;
+      }
+    });
+    return res;
+  }
+
 }
