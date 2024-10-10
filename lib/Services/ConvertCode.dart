@@ -17,13 +17,7 @@ class ProductCodeTransformer {
 
   // Méthode pour transformer le code client en code fournisseur
   static String transform(String supplierName) {
-    // Vérifie si le fournisseur existe dans le map
-    String? supplierPrefix = _supplierCodes[supplierName];
-
-    // Si le fournisseur n'existe pas, renvoie un message d'erreur
-    if (supplierPrefix == null) {
-      throw Exception('Fournisseur non reconnu: $supplierName');
-    }
+    String? supplierPrefix = supplierName.substring(0,3);
 
     // Génère un code aléatoire de 8 caractères
     String randomCode = _generateRandomString(8);
@@ -46,5 +40,13 @@ class ProductCodeTransformer {
       Iterable.generate(
           length, (_) => chars.codeUnitAt(random.nextInt(chars.length))),
     );
+  }
+
+  static bool clientCodeIsValid(String clientCodeScanned){
+    RegExp regex = RegExp(r'^CLI\d{8}$');
+    if(regex.hasMatch(clientCodeScanned)){
+      return true;
+    }
+    return false;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:all_for_sports/Screens/AddProductScreen.dart';
+import 'package:all_for_sports/Services/ConvertCode.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -9,11 +11,11 @@ class FlashQRCodeScreen extends StatefulWidget {
 }
 
 class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
-  String? scanResult;
-
   @override
   Widget build(BuildContext context) {
-    String? refProduitQrCode = '';
+    String refProduitQrCode =
+        ''; // Variavle qui va contenir la reference produit
+    String scanResult = ''; // Variable qui va contenir le résultat du QR code
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scanner un produit'),
@@ -27,10 +29,17 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                 final List<Barcode> barcodes = barcodeCapture.barcodes;
                 for (final barcode in barcodes) {
                   setState(() {
-                    scanResult = barcode
-                        .rawValue; // Utiliser rawValue pour obtenir la valeur du QR code
-                    refProduitQrCode = scanResult;
+                    scanResult = barcode.rawValue.toString();
+                    String referenceCodeClient = scanResult;
+                    print(referenceCodeClient);
+                    refProduitQrCode =
+                        ProductCodeTransformer.transform(referenceCodeClient);
                     print(refProduitQrCode);
+                    if (ProductCodeTransformer.clientCodeIsValid(refProduitQrCode)) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const AddProductScreen()));
+                    }
                   });
                 }
               },

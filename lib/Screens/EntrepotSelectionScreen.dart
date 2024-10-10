@@ -5,10 +5,10 @@ import 'package:all_for_sports/Screens/AccueilScreen.dart';
 
 class EntrepotSelectionScreen extends StatelessWidget {
   final List<Map<String, dynamic>> warehouses = [
-    {"latitude": 50.3592, "longitude": 3.5253, "city": "Valenciennes"},
+    {"latitude": 50.3592, "longitude": 3.5253, "city": "Valenciennes"}, //TODO changer Valenciennes par Lyon
     {"latitude": 49.4944, "longitude": 0.1079, "city": "Le Havre"},
     {"latitude": 43.2965, "longitude": 5.3698, "city": "Marseille"},
-  ];
+  ];                                                                // Coordonnées GPS des villes où il y a des entrepots
 
   @override
   Widget build(BuildContext context) {

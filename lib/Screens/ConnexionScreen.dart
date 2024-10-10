@@ -13,29 +13,20 @@ class ConnexionScreen extends StatefulWidget {
 class _ConnexionScreenState extends State<ConnexionScreen> {
   bool _passwordHidden = true;
 
-  final TextEditingController _controllerId = TextEditingController();
-
+  final TextEditingController _controllerLogin = TextEditingController();
+  // Controller pour le textfield du login
   final TextEditingController _controllerPassword = TextEditingController();
+  // Controller pour le textfield du mot de passe 
 
   @override
   void initState() {
     super.initState();
-    _passwordHidden = true;
-    // TODO: implement initState
-    // super.initState();
-    // _controllerId.addListener(() {
-    //   final String textId = _controllerId.text.toLowerCase();
-    //   // print(textId);
-    // });
-    // _controllerPassword.addListener(() {
-    //   final String textPassword = _controllerPassword.text;
-    //   // print(textPassword);
-    // });
+    _passwordHidden = true; // Variable qui permet de cacher le mot de passe 
   }
 
   @override
   Widget build(BuildContext context) {
-    String messageSnackBar = "";
+    String messageSnackBar = ""; // Variable qui contient le message a afficher dans la SnackBar
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -45,7 +36,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
         ),
         body: Column(children: [
           TextFormField(
-            controller: _controllerId,
+            controller: _controllerLogin,
             decoration: const InputDecoration(
               icon: Icon(Icons.person),
               hintText: "Entrez votre identifiant : ",
@@ -65,7 +56,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                 onPressed: () {
                   messageSnackBar = "";
                   SerializeLogs logs = SerializeLogs(
-                      _controllerId.text, _controllerPassword.text);
+                      _controllerLogin.text, _controllerPassword.text);
                   // String jsonString = jsonEncode(logs.toJson());
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                     Navigator.of(context).push(MaterialPageRoute(
