@@ -39,6 +39,9 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
     if (!serviceEnabled) {
       setState(() {
         _locationMessage = "Le Service de localisation ne fonctionne pas !";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
+        ));
       });
       return;
     }
@@ -51,6 +54,9 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
         setState(() {
           _locationMessage =
               "La localisation de votre position n'est pas autorisée.";
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: ((BuildContext context) => WareHouseSelectionScreen()),
+          ));
         });
         return;
       }
@@ -104,6 +110,9 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
             .setEntrepot(nearbyWarehouse);
       } else {
         _locationMessage = "Aucun entrepôt à moins de 4 km.";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
+        ));
       }
     });
   }

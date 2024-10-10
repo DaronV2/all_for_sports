@@ -25,6 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     // Récupération de l'entrepôt grâce au provider
     String entrepot = Provider.of<WareHouseProvider>(context).entrepot;
+    // String refProduit = Provider.of<WareHouseProvider>(context).refProduit; TODO changer le WareHouseProvider
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajouter un produit'),
@@ -33,16 +34,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Champ de texte pour la référence du produit
-            TextField(
-              controller: refProduitController,
-              decoration: const InputDecoration(
-                labelText: 'Référence du produit',
-              ),
-              onChanged: (value) {
-                refProduit = value;
-              },
+            // Affichage de la référence du produit (non modifiable)
+            const Text(
+              'Référence du produit:',
+              style: TextStyle(fontSize: 16),
             ),
+            const SizedBox(height: 10),
+            // Text(
+            //   refProduit,
+            //   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            // ),
+            const SizedBox(height: 20),
             // Affichage de l'entrepôt sans champ de texte modifiable
             const SizedBox(height: 20),
             Text(

@@ -2,6 +2,9 @@ import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:all_for_sports/Services/ConvertCode.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:provider/provider.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
+import 'package:all_for_sports/Screens/AddProductScreen.dart';
 
 class FlashQRCodeScreen extends StatefulWidget {
   const FlashQRCodeScreen({super.key});
