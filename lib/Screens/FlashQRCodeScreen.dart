@@ -33,9 +33,9 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                     String referenceCodeClient = scanResult;
                     print(referenceCodeClient);
                     refProduitQrCode =
-                        ProductCodeTransformer.transform(referenceCodeClient);
+                        ConvertCode.transform(referenceCodeClient);
                     print(refProduitQrCode);
-                    if (ProductCodeTransformer.clientCodeIsValid(refProduitQrCode)) {
+                    if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const AddProductScreen()));

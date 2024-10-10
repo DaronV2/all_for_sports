@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:all_for_sports/Services/Produit.dart';
-import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:all_for_sports/Services/Api.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     // Récupération de l'entrepôt grâce au provider
-    String entrepot = Provider.of<EntrepotProvider>(context).entrepot;
+    String entrepot = Provider.of<WareHouseProvider>(context).entrepot;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajouter un produit'),

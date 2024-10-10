@@ -1,4 +1,4 @@
-import 'package:all_for_sports/Screens/AccueilScreen.dart';
+import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
@@ -61,7 +61,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                   // String jsonString = jsonEncode(logs.toJson());
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((BuildContext context) => const LocationPage()),
+                      builder: ((BuildContext context) => const ChoosingAWareHouseScreen()),
                     ));
                   } else {
                     if (!Connexiontemp.checkLogin(logs.id)) {

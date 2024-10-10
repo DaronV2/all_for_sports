@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
 import 'package:all_for_sports/Services/Api.dart';
 import 'package:all_for_sports/Services/ProductList.dart';
 
 class FillProductList {
 
-  static String entrepot = EntrepotProvider.getEntrepot();
+  static String entrepot = WareHouseProvider.getEntrepot();
 
   // ** @return Une liste de Widget ProductItem en appelant des données venant de la BDD
   static Future<List<ProductItem>> loadProductList() async {

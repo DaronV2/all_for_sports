@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EntrepotProvider with ChangeNotifier {
+class WareHouseProvider with ChangeNotifier {
   static String _entrepot = '';
 
   // Getter pour récupérer l'entrepôt
