@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:all_for_sports/Services/Provides.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
 import 'package:all_for_sports/Services/Api.dart';
 import 'package:all_for_sports/Services/ProductList.dart';
 
 class FillProductList {
+
+  static String entrepot = EntrepotProvider.getEntrepot();
 
   // ** @return Une liste de Widget ProductItem en appelant des données venant de la BDD
   static Future<List<ProductItem>> loadProductList() async {
@@ -22,8 +25,10 @@ class FillProductList {
   static List<ProductItem> transformProductListToProductItem(ProductList prodList){
     List<ProductItem> list =[];
     prodList.productList.forEach((prod){
-      ProductItem item = ProductItem(reference: prod.productReference, name: prod.description, quantity: prod.quantity, addingDate: prod.addingDate,);
-      list.add(item);
+      if (prod.storage?.location == entrepot){
+        ProductItem item = ProductItem(reference: prod.productReference, name: prod.description, quantity: prod.quantity, addingDate: prod.addingDate,);
+        list.add(item);
+      }
     });
     return list;
   }
