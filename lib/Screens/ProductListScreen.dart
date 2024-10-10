@@ -15,7 +15,7 @@ class _ProductListScreen extends State<ProductListScreen> {
   // Liste des widgets ProductItem qui stockera les widgets et permettra de les afficher
   List<ProductItem> listeProd = [];
 
-  bool isScreenLoading = true;
+  bool isScreenLoading = true; //Cette variable permettra d'afficher ou non un écran de chargement, true = affiche l'écran de chargement 
 
   // Fonction Flutter qui se lance au chargement de la page
   @override
@@ -28,7 +28,6 @@ class _ProductListScreen extends State<ProductListScreen> {
   Future<void> loadList() async {
     listeProd = await FillProductList.loadProductList();
     isScreenLoading = false;
-    print(isScreenLoading);
     setState(() {});
   }
 
