@@ -14,6 +14,8 @@ class FlashQRCodeScreen extends StatefulWidget {
 }
 
 class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
+  bool isScanning = true;
+
   @override
   Widget build(BuildContext context) {
     String refProduitQrCode =
@@ -29,6 +31,7 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
             flex: 5,
             child: MobileScanner(
               onDetect: (BarcodeCapture barcodeCapture) {
+                if (!isScanning) return;
                 final List<Barcode> barcodes = barcodeCapture.barcodes;
                 for (final barcode in barcodes) {
                   setState(() {
@@ -37,9 +40,10 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                     refProduitQrCode =
                         ConvertCode.transform(referenceCodeClient, "DECATHLON");
                     print(' ici present : $refProduitQrCode');
-                    setState(() {
-                    });
+                    // Provider.setRefProduit(refProduitQrCode);
+                    setState(() {});
                     if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
+                      isScanning = false;
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const AddProductScreen()));
