@@ -16,6 +16,7 @@ class _ProductListScreen extends State<ProductListScreen> {
   List<ProductItem> listeProd = [];
 
   bool isScreenLoading = true; //Cette variable permettra d'afficher ou non un écran de chargement, true = affiche l'écran de chargement 
+  bool flecheBack = false;
 
   // Fonction Flutter qui se lance au chargement de la page
   @override
@@ -28,6 +29,7 @@ class _ProductListScreen extends State<ProductListScreen> {
   Future<void> loadList() async {
     listeProd = await FillProductList.loadProductList();
     isScreenLoading = false;
+    flecheBack = true;
     setState(() {});
   }
 
@@ -36,6 +38,7 @@ class _ProductListScreen extends State<ProductListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liste des produits'),
+        automaticallyImplyLeading: flecheBack,
       ),
       body: Center(
         child: isScreenLoading
