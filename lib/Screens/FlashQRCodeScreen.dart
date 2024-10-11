@@ -58,6 +58,7 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
           // Bouton pour aller sur la page AddProduct
           ElevatedButton(
             onPressed: () {
+              if (refProduitQrCode == '') {}
               // Navigation vers la page AddProductScreen
               Navigator.push(
                 context,
