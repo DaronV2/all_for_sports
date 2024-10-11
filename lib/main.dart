@@ -1,5 +1,5 @@
 import 'package:all_for_sports/Screens/ConnexionScreen.dart';
-import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       // Fournir EntrepotProvider à toute l'application
-      create: (context) => EntrepotProvider(),
+      create: (context) => WareHouseProvider(),
       child: MaterialApp(
         title: 'ALL4SPORT App',
         theme: ThemeData(

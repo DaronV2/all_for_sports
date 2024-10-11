@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'FlashQRCodeScreen.dart';
 import 'ProductListScreen.dart';
 
-class AccDart extends StatelessWidget {
-  const AccDart({Key? key}) : super(key: key);
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

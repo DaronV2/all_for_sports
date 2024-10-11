@@ -1,19 +1,19 @@
-import 'package:all_for_sports/Screens/AccueilScreen.dart';
+import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:all_for_sports/Screens/EntrepotSelectionScreen.dart';
+import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 
 // Widget d'état, car la position peut changer au fil du temps
-class LocationPage extends StatefulWidget {
-  const LocationPage({super.key});
+class ChoosingAWareHouseScreen extends StatefulWidget {
+  const ChoosingAWareHouseScreen({super.key});
 
   @override
-  _LocationPageState createState() => _LocationPageState();
+  _ChoosingAWareHouseScreenState createState() => _ChoosingAWareHouseScreenState();
 }
 
-class _LocationPageState extends State<LocationPage> {
+class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   String _locationMessage = "Récupération de la position...";
   // Variable pour stocker l'entrepôt le plus proche
   String? _nearbyWarehouse;
@@ -40,7 +40,7 @@ class _LocationPageState extends State<LocationPage> {
       setState(() {
         _locationMessage = "Le Service de localisation ne fonctionne pas !";
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
         ));
       });
       return;
@@ -55,7 +55,7 @@ class _LocationPageState extends State<LocationPage> {
           _locationMessage =
               "La localisation de votre position n'est pas autorisée.";
           Navigator.of(context).push(MaterialPageRoute(
-            builder: ((BuildContext context) => EntrepotSelectionScreen()),
+            builder: ((BuildContext context) => WareHouseSelectionScreen()),
           ));
         });
         return;
@@ -67,7 +67,7 @@ class _LocationPageState extends State<LocationPage> {
         _locationMessage =
             "Les permissions de localisation sont définitivement refusées.";
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
         ));
       });
       return;
@@ -103,15 +103,15 @@ class _LocationPageState extends State<LocationPage> {
     setState(() {
       if (nearbyWarehouse != null) {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => AccDart()),
+          builder: ((BuildContext context) => WelcomeScreen()),
         ));
         // Mettre à jour le provider avec le nouveau nom de l'entrepôt
-        Provider.of<EntrepotProvider>(context, listen: false)
+        Provider.of<WareHouseProvider>(context, listen: false)
             .setEntrepot(nearbyWarehouse);
       } else {
         _locationMessage = "Aucun entrepôt à moins de 4 km.";
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => EntrepotSelectionScreen()),
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
         ));
       }
     });

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class EntrepotProvider with ChangeNotifier {
-  String _entrepot = '';
-  String _refProduitPourPageAddProduct = '';
+class WareHouseProvider with ChangeNotifier {
+  static String _entrepot = '';
+
+  static String _refProduitPourPageAddProduct = '';
 
   // Getter pour récupérer l'entrepôt
   String get entrepot => _entrepot;
@@ -14,6 +15,10 @@ class EntrepotProvider with ChangeNotifier {
   void setEntrepot(String value) {
     _entrepot = value;
     notifyListeners(); // Notifie toutes les pages écoutant ce changement
+  }
+
+  static String getEntrepot(){
+    return _entrepot;
   }
 
   // Setter pour mettre à jour l'entrepôt et notifier les listeners
