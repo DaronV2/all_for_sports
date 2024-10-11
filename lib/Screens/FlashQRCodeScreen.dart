@@ -39,51 +39,20 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                     String referenceCodeClient = scanResult;
                     refProduitQrCode =
                         ConvertCode.transform(referenceCodeClient, "DECATHLON");
-                    print(' ici present : $refProduitQrCode');
-                    // Provider.setRefProduit(refProduitQrCode);
-                    setState(() {});
+                    Provider.of<WareHouseProvider>(context, listen: false)
+                        .setRefProduit(refProduitQrCode);
                     if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
                       isScanning = false;
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const AddProductScreen()));
                     }
-                    // Mettre à jour la valeur dans le Provider
-                    // if (scanResult != null) {
-                    //   context
-                    //       .read<EntrepotProvider>()
-                    //       .setRefProduit(scanResult!);
-                    // }
                   });
                 }
               },
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Text(
-                scanResult != null
-                    ? 'Résultat du scan: $scanResult'
-                    : 'Scannez un QR code',
-              ),
-            ),
-          ),
-
           const SizedBox(height: 20),
-          // Bouton pour aller sur la page AddProduct
-          ElevatedButton(
-            onPressed: () {
-              if (refProduitQrCode == '') {}
-              // Navigation vers la page AddProductScreen
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AddProductScreen()),
-              );
-            },
-            child: const Text('Ajouter un produit'),
-          ),
         ],
       ),
     );

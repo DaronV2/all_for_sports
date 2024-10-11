@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:all_for_sports/Services/Produit.dart';
 import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController quantiteController =
       TextEditingController(); // Controller Du TextField qui va recevoir la quantité
 
+  final TextEditingController _controllerRefProduct = TextEditingController(text : WareHouseProvider.getRefProduct().toString());
+
   @override
   Widget build(BuildContext context) {
     // Récupération de l'entrepôt grâce au provider
     String entrepot = Provider.of<WareHouseProvider>(context).entrepot;
     String refProduit = Provider.of<WareHouseProvider>(context).refProduit;
+    bool textFieldEnabled = true;
+    print(_controllerRefProduct.text.toString());
+    if(_controllerRefProduct.text.toString() != ''){
+      textFieldEnabled = false;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajouter un produit'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -39,8 +48,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
-            Text(
-              refProduit,
+            TextField(
+              controller: _controllerRefProduct,
+              enabled: textFieldEnabled,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -78,6 +88,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 //Appele de méthode pour envoyer le produit à l'API, et stokage de la valeur dans la variable Réponse de l'API
                 String reponseDeAPI = Api.extractProductReference(JasonBallon);
 
+                Provider.of<WareHouseProvider>(context, listen: false).setRefProduit('');
+
                 // Affichage d'une SnackBar avec la réponse de l'API
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -86,6 +98,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         seconds: 5), // Durée d'affichage de la SnackBar
                   ),
                 );
+                Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const WelcomeScreen()));
               },
               child: const Text('Ajouter le produit'),
             ),

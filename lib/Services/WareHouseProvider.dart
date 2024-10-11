@@ -21,6 +21,10 @@ class WareHouseProvider with ChangeNotifier {
     return _entrepot;
   }
 
+  static String getRefProduct(){
+    return _refProduitPourPageAddProduct;
+  }
+
   // Setter pour mettre à jour l'entrepôt et notifier les listeners
   void setRefProduit(String value) {
     _refProduitPourPageAddProduct = value;
