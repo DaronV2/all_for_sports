@@ -16,7 +16,7 @@ class ConvertCode {
   // };
 
   // Méthode pour transformer le code client en code fournisseur
-  static String transform(String supplierName) {
+  static String transform(String codeClient, String supplierName) {
     String? supplierPrefix = supplierName.substring(0,3);
 
     // Génère un code aléatoire de 8 caractères
@@ -33,7 +33,7 @@ class ConvertCode {
 
   // Méthode privée pour générer une chaîne de caractères aléatoires de longueur donnée
   static String _generateRandomString(int length) {
-    const String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const String chars = '0123456789';
     Random random = Random();
 
     return String.fromCharCodes(
@@ -43,10 +43,12 @@ class ConvertCode {
   }
 
   static bool clientCodeIsValid(String clientCodeScanned){
-    RegExp regex = RegExp(r'^CLI\d{8}$');
+    RegExp regex = RegExp(r'[A-Z][A-Z][A-Z]SPO\d{8}$');
     if(regex.hasMatch(clientCodeScanned)){
+      print('c bon');
       return true;
     }
+    print('c pas bon');
     return false;
   }
 }

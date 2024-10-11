@@ -34,10 +34,11 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen> {
                   setState(() {
                     scanResult = barcode.rawValue.toString();
                     String referenceCodeClient = scanResult;
-                    print(referenceCodeClient);
                     refProduitQrCode =
-                        ConvertCode.transform(referenceCodeClient);
-                    print(refProduitQrCode);
+                        ConvertCode.transform(referenceCodeClient, "DECATHLON");
+                    print(' ici present : $refProduitQrCode');
+                    setState(() {
+                    });
                     if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
