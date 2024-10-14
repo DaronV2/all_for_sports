@@ -1,3 +1,4 @@
+import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
@@ -17,17 +18,18 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   final TextEditingController _controllerLogin = TextEditingController();
   // Controller pour le textfield du login
   final TextEditingController _controllerPassword = TextEditingController();
-  // Controller pour le textfield du mot de passe 
+  // Controller pour le textfield du mot de passe
 
   @override
   void initState() {
     super.initState();
-    _passwordHidden = true; // Variable qui permet de cacher le mot de passe 
+    _passwordHidden = true; // Variable qui permet de cacher le mot de passe
   }
 
   @override
   Widget build(BuildContext context) {
-    String messageSnackBar = ""; // Variable qui contient le message a afficher dans la SnackBar
+    String messageSnackBar =
+        ""; // Variable qui contient le message a afficher dans la SnackBar
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -60,9 +62,10 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       _controllerLogin.text, _controllerPassword.text);
                   // String jsonString = jsonEncode(logs.toJson());
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((BuildContext context) => const ChoosingAWareHouseScreen()),
-                    ));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WareHouseSelectionScreen()));
                   } else {
                     if (!Connexiontemp.checkLogin(logs.id)) {
                       messageSnackBar += "Login incorrect ";
