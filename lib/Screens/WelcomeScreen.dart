@@ -20,10 +20,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Connexioncheck.checkConnectivity(context);
   }
 
+  /// Méthode principale pour construire l'interface utilisateur de la page d'accueil.
+  /// Retourne un widget `Scaffold` contenant l'AppBar et deux boutons de navigation.
   @override
   Widget build(BuildContext context) {
     bool visible = Provider.of<ConnexionProvider>(context).connexion;
     return Scaffold(
+      // Barre d'application affichant le titre de la page.
       appBar: AppBar(
         title: const Text('Page d\'Accueil - AccDart'),
       ),
@@ -31,9 +34,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Premier bouton pour naviguer vers la liste des produits.
             ElevatedButton(
               onPressed: () {
-                // Navigation vers la Page Ajouter Produit
+                // Navigation vers la page `ProductListScreen`.
+                // Retourne une instance de `ProductListScreen`.
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProductListScreen()),
