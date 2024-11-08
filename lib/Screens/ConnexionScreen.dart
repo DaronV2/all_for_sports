@@ -29,16 +29,16 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   }
 
   void redirection(BuildContext context, [bool? disconnected]) {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     if (disconnected != null && disconnected) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Vous etes en mode déconnecté !'),
-          duration: Duration(days: 1), // Durée d'affichage du SnackBar
-          dismissDirection: DismissDirection.none,
-        ));
-      });
+      print("entre");
+      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(false);
+      Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
+    }
+    else {
+      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(true);
+      Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     }
   }
 

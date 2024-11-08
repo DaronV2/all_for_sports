@@ -5,7 +5,7 @@ class WareHouseProvider with ChangeNotifier {
 
   static String _refProduitPourPageAddProduct = '';
 
-  static bool _connexionState = true;
+  static bool _connexion = false;
 
   // Getter pour récupérer l'entrepôt
   String get entrepot => _entrepot;
@@ -13,7 +13,7 @@ class WareHouseProvider with ChangeNotifier {
   // Getter pour récupérer refProduitPourPageAddProduct
   String get refProduit => _refProduitPourPageAddProduct;
 
-  bool get connexionState => _connexionState;
+  bool get connexion => _connexion;
 
   // Setter pour mettre à jour l'entrepôt et notifier les listeners
   void setEntrepot(String value) {
@@ -22,11 +22,11 @@ class WareHouseProvider with ChangeNotifier {
   }
 
   static bool getConnexionState(){
-    return _connexionState;
+    return _connexion;
   }
 
   void setConnexionState(bool value){
-    _connexionState = value;
+    _connexion = value;
     notifyListeners();
   }
 
