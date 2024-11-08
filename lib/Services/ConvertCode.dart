@@ -41,7 +41,7 @@ class ConvertCode {
   }
 
   static bool clientCodeIsValid(String clientCodeScanned){
-    RegExp regex = RegExp(r'[A-Z][A-Z][A-Z]SPO\d{8}$');
+    RegExp regex = RegExp(r'[A-Z][A-Z][A-Z]CLI\d{8}$');
     if(regex.hasMatch(clientCodeScanned)){
       print('c bon');
       return true;

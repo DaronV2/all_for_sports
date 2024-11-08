@@ -93,14 +93,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ElevatedButton(
               onPressed: () async {
                 // Action à effectuer lors de la soumission du formulaire
-                print('Référence du produit: $refProduit');
-                print('Entrepôt: $entrepot');
-                print('Quantité: $quantite');
-
                 // Créer un Map pour le JSON
                 Produit Ballon = Produit(refProduit, entrepot, quantite);
                 String JasonBallon = jsonEncode(Ballon.toJson());
-                print(JasonBallon);
+                print("JSon : "+ JasonBallon);
 
                 //Appele de méthode pour envoyer le produit à l'API, et stokage de la valeur dans la variable Réponse de l'API
                 String reponseDeAPI = Api.extractProductReference(JasonBallon);
