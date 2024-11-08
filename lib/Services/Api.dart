@@ -32,4 +32,17 @@ class Api {
       return messageErreur;
     }
   }
+
+  static send(RequeteType req, String chaineJson){
+    if(req == RequeteType.get){
+      print("get : "+ chaineJson);
+    }else{
+      print("Post : "+ chaineJson);
+    }
+  }
+}
+
+enum RequeteType{
+  get,
+  post
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:all_for_sports/Services/ConvertCode.dart';
 import 'package:flutter/material.dart';
@@ -97,9 +96,6 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-
-    // });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scanner un produit'),
@@ -110,34 +106,6 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
             flex: 5,
             child: MobileScanner(
               controller: qrCodeController,
-              // onDetectError: (Object error, StackTrace stack) {
-              //   print("ici : $error");
-              // },
-              // onDetect: (BarcodeCapture barcodeCapture) async {
-              //   try {
-              //     if (!isScanning) return;
-              //     final List<Barcode> barcodes = barcodeCapture.barcodes;
-              //     for (final barcode in barcodes) {
-              //       setState(() {
-              //         scanResult = barcode.rawValue.toString();
-              //         String referenceCodeClient = scanResult;
-              //         refProduitQrCode = ConvertCode.transform(
-              //             referenceCodeClient, "DECATHLON");
-              //         Provider.of<WareHouseProvider>(context, listen: false)
-              //             .setRefProduit(refProduitQrCode);
-              //         if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
-              //           isScanning = false;
-              //           qrCodeController.stop();
-              //           Navigator.of(context).push(MaterialPageRoute(
-              //               builder: (BuildContext context) =>
-              //                   const AddProductScreen()));
-              //         }
-              //       });
-              //     }
-              //   } catch (e) {
-              //     print(e);
-              //   }
-              // },
             ),
           ),
           const SizedBox(height: 20),

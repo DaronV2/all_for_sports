@@ -1,6 +1,5 @@
 import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
-import 'package:all_for_sports/Screens/WelcomeScreen.dart';
-import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
+import 'package:all_for_sports/Services/ConnexionProvider.dart';
 import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
@@ -15,12 +14,14 @@ class ConnexionScreen extends StatefulWidget {
 }
 
 class _ConnexionScreenState extends State<ConnexionScreen> {
+  // Booléen si mot de passe est caché ou non
   bool _passwordHidden = true;
 
-  final TextEditingController _controllerLogin = TextEditingController();
   // Controller pour le textfield du login
-  final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerLogin = TextEditingController();
+
   // Controller pour le textfield du mot de passe
+  final TextEditingController _controllerPassword = TextEditingController();
 
   @override
   void initState() {
@@ -30,13 +31,12 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   void redirection(BuildContext context, [bool? disconnected]) {
     if (disconnected != null && disconnected) {
-      print("entre");
-      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(false);
+      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(false);
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     }
     else {
-      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(true);
+      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(true);
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     }
@@ -101,7 +101,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               onPressed: () {
                 redirection(context, true);
               },
-              child: Text("Se connecter en mode hors ligne"))
+              child: const Text("Se connecter en mode hors ligne"))
         ]),
       ),
     );

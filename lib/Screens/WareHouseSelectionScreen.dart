@@ -16,11 +16,11 @@ class WareHouseSelectionScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sélectionnez un Entrepôt'),
+        title: const Text('Sélectionnez un Entrepôt'),
       ),
       body: Center(
         child: DropdownButton<String>(
-          hint: Text('Sélectionnez un entrepôt'),
+          hint: const Text('Sélectionnez un entrepôt'),
           value: selectedWarehouse.isNotEmpty ? selectedWarehouse : null,
           onChanged: (String? newValue) {
             if (newValue != null) {
@@ -29,7 +29,7 @@ class WareHouseSelectionScreen extends StatelessWidget {
               // Redirection vers la page AccDart après la sélection
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
               );
             }
           },

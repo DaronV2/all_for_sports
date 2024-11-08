@@ -1,20 +1,6 @@
 import 'dart:math';
 
 class ConvertCode {
-  // Map pour stocker les correspondances entre fournisseurs et codes de base
-  // static const Map<String, String> _supplierCodes = {
-  //   'Decathlon': 'Dec',
-  //   'Intersport': 'Int',
-  //   'Nike': 'Nik',
-  //   'Adidas': 'Adi',
-  //   'Puma': 'Pum',
-  //   'UnderArmour': 'Und',
-  //   'NewBalance': 'New',
-  //   'Reebok': 'Ree',
-  //   'Asics': 'Asi',
-  //   'Salomon': 'Sal',
-  // };
-
   // Méthode pour transformer le code client en code fournisseur
   static String transform(String codeClient, String supplierName) {
     String? supplierPrefix = supplierName.substring(0,3);

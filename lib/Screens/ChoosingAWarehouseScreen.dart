@@ -18,7 +18,6 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   String _locationMessage = "Récupération de la position...";
   // Variable pour stocker l'entrepôt le plus proche
   String? _nearbyWarehouse;
-  // String? _selectedWarehouse;
 
   // Getter pour accéder à l'entrepôt le plus proche
   String? get nearbyWarehouse => _nearbyWarehouse;
@@ -104,7 +103,7 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
     setState(() {
       if (nearbyWarehouse != null) {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => WelcomeScreen()),
+          builder: ((BuildContext context) => const WelcomeScreen()),
         ));
         // Mettre à jour le provider avec le nouveau nom de l'entrepôt
         Provider.of<WareHouseProvider>(context, listen: false)
