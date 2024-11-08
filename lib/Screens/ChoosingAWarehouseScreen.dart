@@ -10,7 +10,8 @@ class ChoosingAWareHouseScreen extends StatefulWidget {
   const ChoosingAWareHouseScreen({super.key});
 
   @override
-  _ChoosingAWareHouseScreenState createState() => _ChoosingAWareHouseScreenState();
+  _ChoosingAWareHouseScreenState createState() =>
+      _ChoosingAWareHouseScreenState();
 }
 
 class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
