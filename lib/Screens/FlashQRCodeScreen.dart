@@ -16,7 +16,6 @@ class FlashQRCodeScreen extends StatefulWidget {
 
 class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     with WidgetsBindingObserver {
-
   final MobileScannerController qrCodeController = MobileScannerController(
     autoStart: false,
     torchEnabled: false,
@@ -49,12 +48,14 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
         _barcode = barcodes.barcodes.firstOrNull;
         String? referenceCodeClient = _barcode?.rawValue;
         if (referenceCodeClient != null) {
-          String refProduitQrCode = ConvertCode.transform(referenceCodeClient, "DECATHLON");
-          Provider.of<WareHouseProvider>(context, listen: false)
-              .setRefProduit(refProduitQrCode);
-          if (ConvertCode.clientCodeIsValid(refProduitQrCode)) {
+          if (ConvertCode.clientCodeIsValid(referenceCodeClient)) {
+            String refProduitQrCode = ConvertCode.transform(referenceCodeClient,
+                "DECATHLON"); // Ici a faire avec l'API pour gerer code ( Faire dico de code fournisseur et code a nous)
+            Provider.of<WareHouseProvider>(context, listen: false)
+                .setRefProduit(refProduitQrCode);
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => const AddProductScreen()));
+            dispose();
           }
         }
       });
@@ -87,20 +88,18 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
 
         unawaited(qrCodeController.start());
       case AppLifecycleState.inactive:
-        // unawaited(_subscription?.cancel());
-        // _subscription = null;
-        // unawaited(qrCodeController.stop());
-        return;
+        unawaited(_subscription?.cancel());
+        _subscription = null;
+        unawaited(qrCodeController.stop());
+      // return;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // qrCodeController.start();
-    // qrCodeController.detectionSpeed = DetectionSpeed.noDuplicates;
-    String refProduitQrCode =
-        ''; // Variavle qui va contenir la reference produit
-    String scanResult = ''; // Variable qui va contenir le résultat du QR code
+    // setState(() {
+
+    // });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scanner un produit'),
@@ -142,18 +141,6 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
             ),
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-            child: Text("test"),
-            onPressed: () {
-              // qrCodeController.stop();
-              // qrCodeController.stop();
-              int? cam = qrCodeController.value.availableCameras;
-              MobileScannerException? xcept = qrCodeController.value.error;
-              var details = xcept?.errorDetails?.details;
-              print(
-                  "$xcept , le nombre de camera dispo : $cam, details : $details");
-            },
-          )
         ],
       ),
     );

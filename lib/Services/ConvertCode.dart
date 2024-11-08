@@ -26,8 +26,6 @@ class ConvertCode {
     String supplierProductCode =
         '${supplierPrefix.toUpperCase()}SPO$randomCode';
 
-    print(supplierProductCode);
-
     return supplierProductCode;
   }
 
