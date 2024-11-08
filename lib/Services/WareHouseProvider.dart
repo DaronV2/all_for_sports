@@ -5,16 +5,29 @@ class WareHouseProvider with ChangeNotifier {
 
   static String _refProduitPourPageAddProduct = '';
 
+  static bool _connexion = false;
+
   // Getter pour récupérer l'entrepôt
   String get entrepot => _entrepot;
 
   // Getter pour récupérer refProduitPourPageAddProduct
   String get refProduit => _refProduitPourPageAddProduct;
 
+  bool get connexion => _connexion;
+
   // Setter pour mettre à jour l'entrepôt et notifier les listeners
   void setEntrepot(String value) {
     _entrepot = value;
     notifyListeners(); // Notifie toutes les pages écoutant ce changement
+  }
+
+  static bool getConnexionState(){
+    return _connexion;
+  }
+
+  void setConnexionState(bool value){
+    _connexion = value;
+    notifyListeners();
   }
 
   static String getEntrepot(){

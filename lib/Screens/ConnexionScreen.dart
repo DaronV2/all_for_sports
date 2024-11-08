@@ -1,9 +1,11 @@
 import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ConnexionScreen extends StatefulWidget {
   const ConnexionScreen({super.key});
@@ -24,6 +26,20 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   void initState() {
     super.initState();
     _passwordHidden = true; // Variable qui permet de cacher le mot de passe
+  }
+
+  void redirection(BuildContext context, [bool? disconnected]) {
+    if (disconnected != null && disconnected) {
+      print("entre");
+      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(false);
+      Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
+    }
+    else {
+      Provider.of<WareHouseProvider>(context, listen: false).setConnexionState(true);
+      Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
+    }
   }
 
   @override
@@ -62,10 +78,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       _controllerLogin.text, _controllerPassword.text);
                   // String jsonString = jsonEncode(logs.toJson());
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WareHouseSelectionScreen()));
+                    redirection(context);
                   } else {
                     if (!Connexiontemp.checkLogin(logs.id)) {
                       messageSnackBar += "Login incorrect ";
@@ -84,6 +97,11 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
               );
             },
           ),
+          ElevatedButton(
+              onPressed: () {
+                redirection(context, true);
+              },
+              child: Text("Se connecter en mode hors ligne"))
         ]),
       ),
     );
