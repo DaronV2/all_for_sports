@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:all_for_sports/Services/ConnexionProvider.dart';
+import 'package:all_for_sports/Services/ProductListProvider.dart';
+import 'package:all_for_sports/Services/ProductReferenceProvider.dart';
 import 'package:all_for_sports/Services/Produit.dart';
 import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       TextEditingController(); // Controller Du TextField qui va recevoir la quantité
 
   final TextEditingController _controllerRefProduct =
-      TextEditingController(text: WareHouseProvider.getRefProduct().toString()); // Controller Du TextField qui va recevoir la refProduit
+      TextEditingController(text: ProductReferenceProvider.getRefProduct().toString()); // Controller Du TextField qui va recevoir la refProduit
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     // Récupération de l'entrepôt grâce au provider
     String entrepot = Provider.of<WareHouseProvider>(context).entrepot;
-    String refProduit = Provider.of<WareHouseProvider>(context).refProduit;
+    String refProduit = Provider.of<ProductReferenceProvider>(context).refProduit;
     bool textFieldEnabled = true;
     if (_controllerRefProduct.text.toString().isNotEmpty) {
       textFieldEnabled = false;
@@ -89,7 +91,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 //Appele de méthode pour envoyer le produit à l'API, et stokage de la valeur dans la variable Réponse de l'API
                 String reponseDeAPI = Api.extractProductReference(jasonBallon);
 
-                Provider.of<WareHouseProvider>(context, listen: false)
+                Provider.of<ProductReferenceProvider>(context, listen: false)
                     .setRefProduit('');
 
                 // Affichage d'une SnackBar avec la réponse de l'API
@@ -104,15 +106,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 bool connexion = Provider.of<ConnexionProvider>(context, listen: false).connexion;
                 if(connexion){
                   Api.send(RequeteType.post, jasonBallon);
-                  List<String> listRequeteEnAtt = Provider.of<WareHouseProvider>(context, listen: false).listRequete;
+                  List<String> listRequeteEnAtt = Provider.of<ProductListProvider>(context, listen: false).listRequete;
                   if(listRequeteEnAtt.isNotEmpty){
                     for (String reqJson in listRequeteEnAtt){
                       Api.send(RequeteType.post, reqJson);
                     }
-                    Provider.of<WareHouseProvider>(context, listen: false).setProduitListRequetesEmpty();
+                    Provider.of<ProductListProvider>(context, listen: false).setProduitListRequetesEmpty();
                   }
                 }else{
-                  Provider.of<WareHouseProvider>(context, listen: false).addProduitListRequetes(jasonBallon);
+                  Provider.of<ProductListProvider>(context, listen: false).addProduitListRequetes(jasonBallon);
                 }
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => const WelcomeScreen()));

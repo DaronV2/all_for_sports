@@ -2,7 +2,6 @@ import 'package:all_for_sports/Screens/FlashQRCodeScreen.dart';
 import 'package:all_for_sports/Screens/ProductListScreen.dart';
 import 'package:all_for_sports/Services/ConnexionCheck.dart';
 import 'package:all_for_sports/Services/ConnexionProvider.dart';
-import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

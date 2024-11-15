@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:all_for_sports/Screens/AddProductScreen.dart';
 import 'package:all_for_sports/Services/ConvertCode.dart';
+import 'package:all_for_sports/Services/ProductReferenceProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,7 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
           if (ConvertCode.clientCodeIsValid(referenceCodeClient)) {
             String refProduitQrCode = ConvertCode.transform(referenceCodeClient,
                 "DECATHLON"); // Ici a faire avec l'API pour gerer code ( Faire dico de code fournisseur et code a nous)
-            Provider.of<WareHouseProvider>(context, listen: false)
+            Provider.of<ProductReferenceProvider>(context, listen: false)
                 .setRefProduit(refProduitQrCode);
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => const AddProductScreen()));
