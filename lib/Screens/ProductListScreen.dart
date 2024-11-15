@@ -13,10 +13,10 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreen extends State<ProductListScreen> {
   // Liste des widgets ProductItem qui stockera les widgets et permettra de les afficher
-  List<ProductItem> listeProd = [];
+  List<ProductItem> productList = [];
 
   bool isScreenLoading = true; //Cette variable permettra d'afficher ou non un écran de chargement, true = affiche l'écran de chargement 
-  bool flecheBack = false;
+  bool backArrow = false; // variable pour enlever la fleche de retour a la précédente page
 
   // Fonction Flutter qui se lance au chargement de la page
   @override
@@ -27,9 +27,9 @@ class _ProductListScreen extends State<ProductListScreen> {
 
   // Fonction qui permet de remplir la liste de Widgets et de recharger l'état de la page
   Future<void> loadList() async {
-    listeProd = await FillProductList.loadProductList();
+    productList = await FillProductList.loadProductList();
     isScreenLoading = false;
-    flecheBack = true;
+    backArrow = true;
     setState(() {});
   }
 
@@ -38,7 +38,7 @@ class _ProductListScreen extends State<ProductListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liste des produits'),
-        automaticallyImplyLeading: flecheBack,
+        automaticallyImplyLeading: backArrow, // Permet d'afficher ou non la fleche de retour a la page précédente
       ),
       body: Center(
         child: isScreenLoading
@@ -47,9 +47,9 @@ class _ProductListScreen extends State<ProductListScreen> {
                 children: [
                   // Utilisation de ListView.builder pour le défilement infini
                   ListView.builder(
-                    itemCount: listeProd.length,
+                    itemCount: productList.length,
                     itemBuilder: (context, index) {
-                      return listeProd[index]; // Affiche chaque produit
+                      return productList[index]; // Affiche chaque produit
                     },
                   ),
                   Positioned(
@@ -65,12 +65,12 @@ class _ProductListScreen extends State<ProductListScreen> {
                           ),
                         );
                       },
+                      backgroundColor: Colors.blue,
+                      tooltip: 'Ajouter un produit',
                       child: const Icon(
                         Icons.add,
                         size: 40, // Taille de l'icône plus grande
                       ),
-                      backgroundColor: Colors.blue,
-                      tooltip: 'Ajouter un produit',
                     ),
                   ),
                 ],

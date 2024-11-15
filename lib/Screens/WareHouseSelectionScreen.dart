@@ -31,7 +31,7 @@ class WareHouseSelectionScreen extends StatelessWidget {
       body: Center(
         child: DropdownButton<String>(
           // Texte affiché quand aucun entrepôt n'est sélectionné
-          hint: Text('Sélectionnez un entrepôt'),
+          hint: const Text('Sélectionnez un entrepôt'),
           // Valeur sélectionnée. Null si aucun entrepôt n'a encore été choisi
           value: selectedWarehouse.isNotEmpty ? selectedWarehouse : null,
           // Callback appelé lorsque l'utilisateur sélectionne un nouvel entrepôt

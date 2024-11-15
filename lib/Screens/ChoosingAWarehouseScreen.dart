@@ -30,7 +30,11 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   ];
 
   // Fonction pour obtenir la localisation
-  Future<void> recuperationDeLaPositionDeLappareil() async {
+  // Fonction getDevicePosition : 
+  //  paramètres : 
+  //    aucun
+  //  Retourne Rien 
+  Future<void> getDevicePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -61,7 +65,7 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
         return;
       }
     }
-
+    // Si la permission est refusée
     if (permission == LocationPermission.deniedForever) {
       setState(() {
         _locationMessage =
@@ -72,7 +76,6 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
       });
       return;
     }
-
     // Obtenir la position actuelle
     Position position = await Geolocator.getCurrentPosition(
       locationSettings: const LocationSettings(
@@ -120,7 +123,7 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   @override
   void initState() {
     super.initState();
-    recuperationDeLaPositionDeLappareil();
+    getDevicePosition();
   }
 
   @override
@@ -136,7 +139,7 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: recuperationDeLaPositionDeLappareil,
+        onPressed: getDevicePosition,
         child: const Icon(Icons.location_on),
       ),
     );

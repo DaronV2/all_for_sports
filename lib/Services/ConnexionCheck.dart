@@ -3,13 +3,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class Connexioncheck {
+  //Fonction qui permet de savoir si on est connecté ou non 
   static Future<void> checkConnectivity(BuildContext context) async {
-    final Connectivity _connectivity = Connectivity();
+    final Connectivity connectivity = Connectivity();
     try {
-      List<ConnectivityResult> result = await _connectivity.checkConnectivity();
-      if (result.contains(ConnectivityResult.none)) {
+      List<ConnectivityResult> result = await connectivity.checkConnectivity(); // Récupérer données de connexion
+      if (result.contains(ConnectivityResult.none)) { // Si il n'y a pas de connexion
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => const ConnexionScreen()));
+            builder: (BuildContext context) => const ConnexionScreen())); //Redirection vers la page de connexion
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
