@@ -10,7 +10,7 @@ class Connexioncheck {
       List<ConnectivityResult> result = await connectivity.checkConnectivity(); // Récupérer données de connexion
       if (result.contains(ConnectivityResult.none)) { // Si il n'y a pas de connexion
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => const ConnexionScreen()));
+            builder: (BuildContext context) => const ConnexionScreen())); //Redirection vers la page de connexion
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(

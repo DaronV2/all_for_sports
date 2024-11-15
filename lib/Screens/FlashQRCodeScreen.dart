@@ -41,6 +41,10 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     );
   }
 
+  // Fonction _handleBarcode : 
+  //  paramètres : 
+  //    - BarcodeCapture barcodes, contient les QR Codes scannés par l'appli
+  //  Retourne Rien 
   void _handleBarcode(BarcodeCapture barcodes) {
     if (mounted) {
       setState(() {

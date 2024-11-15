@@ -30,6 +30,10 @@ class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   ];
 
   // Fonction pour obtenir la localisation
+  // Fonction getDevicePosition : 
+  //  paramètres : 
+  //    aucun
+  //  Retourne Rien 
   Future<void> getDevicePosition() async {
     bool serviceEnabled;
     LocationPermission permission;

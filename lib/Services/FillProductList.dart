@@ -8,7 +8,10 @@ class FillProductList {
 
   static String entrepot = WareHouseProvider.getEntrepot();
 
-  // ** @return Une liste de Widget ProductItem en appelant des données venant de la BDD
+  // Fonction loadProductList : 
+  //  paramètres : 
+  //    - aucun
+  //  Retourne List<ProductItem> qui contient les Produits présents dans l'api
   static Future<List<ProductItem>> loadProductList() async {
     List<ProductItem> result = [];
     try {
@@ -22,6 +25,10 @@ class FillProductList {
     }
   }
 
+  // Fonction transformProductListToProductItem : 
+  //  paramètres : 
+  //    - ProductList prodList, contient une liste de produit
+  //  Retourne List de ProdcutItem qui contient les données des produits de la ProductList
   static List<ProductItem> transformProductListToProductItem(ProductList prodList){
     List<ProductItem> list =[];
     prodList.productList.forEach((prod){

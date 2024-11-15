@@ -1,3 +1,4 @@
+import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
 import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 import 'package:all_for_sports/Services/ConnexionProvider.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
@@ -28,16 +29,21 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
     _passwordHidden = true; // Variable qui permet de cacher le mot de passe
   }
 
+  // Fonction redirection : 
+  //  paramètres : 
+  //    - BuildContext context , récupère le contexte d'un build 
+  //    - bool disconnected , paramètre facultatif, qui envoi sur la connexion est établie ou non
+  //  Retourne Rien 
   void redirection(BuildContext context, [bool? disconnected]) {
     if (disconnected != null && disconnected) {
       Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(false); // Mettre l'état de la cpnnexion a faux
       Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
+        MaterialPageRoute(builder: (context) => const ChoosingAWareHouseScreen()));
     }
     else {
       Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(true); // Mettre l'état de la connexion a vrai
       Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
+        MaterialPageRoute(builder: (context) => const ChoosingAWareHouseScreen()));
     }
   }
 
