@@ -5,7 +5,6 @@ import 'package:all_for_sports/Services/ProductReferenceProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
-import 'package:all_for_sports/Services/WareHouseProvider.dart';
 
 class FlashQRCodeScreen extends StatefulWidget {
   const FlashQRCodeScreen({super.key});
@@ -16,7 +15,7 @@ class FlashQRCodeScreen extends StatefulWidget {
 
 class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     with WidgetsBindingObserver {
-  final MobileScannerController qrCodeController = MobileScannerController(
+  final MobileScannerController _controllerQrCode = MobileScannerController(
     autoStart: false,
     torchEnabled: false,
     useNewCameraSelector: true,
@@ -46,15 +45,15 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     if (mounted) {
       setState(() {
         _barcode = barcodes.barcodes.firstOrNull;
-        String? referenceCodeClient = _barcode?.rawValue;
+        String? referenceCodeClient = _barcode?.rawValue; // Récupérér la valeur du QR Code
         if (referenceCodeClient != null) {
-          if (ConvertCode.clientCodeIsValid(referenceCodeClient)) {
+          if (ConvertCode.clientCodeIsValid(referenceCodeClient)/* Focntion qui utilise un regex pour vérifier la valeur du QR Code */ ) {
             String refProduitQrCode = ConvertCode.transform(referenceCodeClient,
                 "DECATHLON"); // Ici a faire avec l'API pour gerer code ( Faire dico de code fournisseur et code a nous)
             Provider.of<ProductReferenceProvider>(context, listen: false)
-                .setRefProduit(refProduitQrCode);
+                .setRefProduit(refProduitQrCode); // Mettre la référence produit récupérée par le QR Code dans le provider
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => const AddProductScreen()));
+                builder: (BuildContext context) => const AddProductScreen())); // Redirection vers la page Ajouter produit
             dispose();
           }
         }
@@ -62,19 +61,21 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     }
   }
 
+ // Fonction nécessaire au bon fonctionnement du widget de scan de QR Code
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    _subscription = qrCodeController.barcodes.listen(_handleBarcode);
+    _subscription = _controllerQrCode.barcodes.listen(_handleBarcode);
 
-    unawaited(qrCodeController.start());
+    unawaited(_controllerQrCode.start());
   }
 
+ // Fonction nécessaire au bon fonctionnement du widget de scan de QR Code
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!qrCodeController.value.hasCameraPermission) {
+    if (!_controllerQrCode.value.hasCameraPermission) {
       return;
     }
 
@@ -84,13 +85,13 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
       case AppLifecycleState.paused:
         return;
       case AppLifecycleState.resumed:
-        _subscription = qrCodeController.barcodes.listen(_handleBarcode);
+        _subscription = _controllerQrCode.barcodes.listen(_handleBarcode);
 
-        unawaited(qrCodeController.start());
+        unawaited(_controllerQrCode.start());
       case AppLifecycleState.inactive:
         unawaited(_subscription?.cancel());
         _subscription = null;
-        unawaited(qrCodeController.stop());
+        unawaited(_controllerQrCode.stop());
       // return;
     }
   }
@@ -106,7 +107,7 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
           Expanded(
             flex: 5,
             child: MobileScanner(
-              controller: qrCodeController,
+              controller: _controllerQrCode,
             ),
           ),
           const SizedBox(height: 20),
@@ -121,6 +122,6 @@ class _FlashQRCodeScreenState extends State<FlashQRCodeScreen>
     unawaited(_subscription?.cancel());
     _subscription = null;
     super.dispose();
-    await qrCodeController.dispose();
+    await _controllerQrCode.dispose();
   }
 }

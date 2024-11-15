@@ -23,7 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   /// Retourne un widget `Scaffold` contenant l'AppBar et deux boutons de navigation.
   @override
   Widget build(BuildContext context) {
-    bool visible = Provider.of<ConnexionProvider>(context).connexion;
+    bool visible = Provider.of<ConnexionProvider>(context).connexion; // Variable de récupérer l'état de la connexion grace au provider
     return Scaffold(
       // Barre d'application affichant le titre de la page.
       appBar: AppBar(
@@ -38,7 +38,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 // Navigation vers la page `ProductListScreen`.
                 // Retourne une instance de `ProductListScreen`.
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProductListScreen()),
@@ -58,6 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               child: const Text('Aller à la PageQRCode'),
             ),
+            const SizedBox(height: 20), // Espacement entre les boutons
             Visibility(
               visible: !visible,
               child: ElevatedButton(

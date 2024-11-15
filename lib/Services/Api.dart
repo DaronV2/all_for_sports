@@ -33,6 +33,7 @@ class Api {
     }
   }
 
+  // Focntion pour simuler l'envoi à l'API 
   static send(RequeteType req, String chaineJson){
     if(req == RequeteType.get){
       print("get : "+ chaineJson);

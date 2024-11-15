@@ -30,12 +30,12 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   void redirection(BuildContext context, [bool? disconnected]) {
     if (disconnected != null && disconnected) {
-      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(false);
+      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(false); // Mettre l'état de la cpnnexion a faux
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     }
     else {
-      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(true);
+      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(true); // Mettre l'état de la connexion a vrai
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => WareHouseSelectionScreen()));
     }
@@ -43,8 +43,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String messageSnackBar =
-        ""; // Variable qui contient le message a afficher dans la SnackBar
+    String messageSnackBar = ""; // Variable qui contient le message a afficher dans la SnackBar
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -74,8 +73,10 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                 onPressed: () {
                   messageSnackBar = "";
                   SerializeLogs logs = SerializeLogs(
-                      _controllerLogin.text, _controllerPassword.text);
+                      _controllerLogin.text, _controllerPassword.text); // Mettre les logs de connexion dans un objet
                   // String jsonString = jsonEncode(logs.toJson());
+
+                  // Connexion temporaire sans API 
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                     redirection(context);
                   } else {
