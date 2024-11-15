@@ -29,27 +29,33 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
     _passwordHidden = true; // Variable qui permet de cacher le mot de passe
   }
 
-  // Fonction redirection : 
-  //  paramètres : 
-  //    - BuildContext context , récupère le contexte d'un build 
+  // Fonction redirection :
+  //  paramètres :
+  //    - BuildContext context , récupère le contexte d'un build
   //    - bool disconnected , paramètre facultatif, qui envoi sur la connexion est établie ou non
-  //  Retourne Rien 
+  //  Retourne Rien
   void redirection(BuildContext context, [bool? disconnected]) {
     if (disconnected != null && disconnected) {
-      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(false); // Mettre l'état de la cpnnexion a faux
-      Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const ChoosingAWareHouseScreen()));
-    }
-    else {
-      Provider.of<ConnexionProvider>(context, listen: false).setConnexionState(true); // Mettre l'état de la connexion a vrai
-      Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const ChoosingAWareHouseScreen()));
+      Provider.of<ConnexionProvider>(context, listen: false)
+          .setConnexionState(false); // Mettre l'état de la cpnnexion a faux
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const ChoosingAWareHouseScreen()));
+    } else {
+      Provider.of<ConnexionProvider>(context, listen: false)
+          .setConnexionState(true); // Mettre l'état de la connexion a vrai
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const ChoosingAWareHouseScreen()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    String messageSnackBar = ""; // Variable qui contient le message a afficher dans la SnackBar
+    String messageSnackBar =
+        ""; // Variable qui contient le message a afficher dans la SnackBar
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -79,10 +85,11 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                 onPressed: () {
                   messageSnackBar = "";
                   SerializeLogs logs = SerializeLogs(
-                      _controllerLogin.text, _controllerPassword.text); // Mettre les logs de connexion dans un objet
+                      _controllerLogin.text,
+                      _controllerPassword
+                          .text); // Mettre les logs de connexion dans un objet
                   // String jsonString = jsonEncode(logs.toJson());
-
-                  // Connexion temporaire sans API 
+                  // Connexion temporaire sans API
                   if (Connexiontemp.checkLogs(logs.id, logs.password)) {
                     redirection(context);
                   } else {
