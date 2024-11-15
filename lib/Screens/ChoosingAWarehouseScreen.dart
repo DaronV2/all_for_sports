@@ -1,18 +1,20 @@
-import 'package:all_for_sports/Screens/AccueilScreen.dart';
+import 'package:all_for_sports/Screens/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:all_for_sports/Services/Provides.dart';
+import 'package:all_for_sports/Services/WareHouseProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 
 // Widget d'état, car la position peut changer au fil du temps
-class LocationPage extends StatefulWidget {
-  const LocationPage({super.key});
+class ChoosingAWareHouseScreen extends StatefulWidget {
+  const ChoosingAWareHouseScreen({super.key});
 
   @override
-  _LocationPageState createState() => _LocationPageState();
+  _ChoosingAWareHouseScreenState createState() =>
+      _ChoosingAWareHouseScreenState();
 }
 
-class _LocationPageState extends State<LocationPage> {
+class _ChoosingAWareHouseScreenState extends State<ChoosingAWareHouseScreen> {
   String _locationMessage = "Récupération de la position...";
   // Variable pour stocker l'entrepôt le plus proche
   String? _nearbyWarehouse;
@@ -28,7 +30,11 @@ class _LocationPageState extends State<LocationPage> {
   ];
 
   // Fonction pour obtenir la localisation
-  Future<void> recuperationDeLaPositionDeLappareil() async {
+  // Fonction getDevicePosition : 
+  //  paramètres : 
+  //    aucun
+  //  Retourne Rien 
+  Future<void> getDevicePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -37,6 +43,9 @@ class _LocationPageState extends State<LocationPage> {
     if (!serviceEnabled) {
       setState(() {
         _locationMessage = "Le Service de localisation ne fonctionne pas !";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
+        ));
       });
       return;
     }
@@ -49,19 +58,24 @@ class _LocationPageState extends State<LocationPage> {
         setState(() {
           _locationMessage =
               "La localisation de votre position n'est pas autorisée.";
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: ((BuildContext context) => WareHouseSelectionScreen()),
+          ));
         });
         return;
       }
     }
-
+    // Si la permission est refusée
     if (permission == LocationPermission.deniedForever) {
       setState(() {
         _locationMessage =
             "Les permissions de localisation sont définitivement refusées.";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
+        ));
       });
       return;
     }
-
     // Obtenir la position actuelle
     Position position = await Geolocator.getCurrentPosition(
       locationSettings: const LocationSettings(
@@ -92,13 +106,16 @@ class _LocationPageState extends State<LocationPage> {
     setState(() {
       if (nearbyWarehouse != null) {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: ((BuildContext context) => AccDart()),
+          builder: ((BuildContext context) => const WelcomeScreen()),
         ));
         // Mettre à jour le provider avec le nouveau nom de l'entrepôt
-        Provider.of<EntrepotProvider>(context, listen: false)
+        Provider.of<WareHouseProvider>(context, listen: false)
             .setEntrepot(nearbyWarehouse);
       } else {
         _locationMessage = "Aucun entrepôt à moins de 4 km.";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((BuildContext context) => WareHouseSelectionScreen()),
+        ));
       }
     });
   }
@@ -106,7 +123,7 @@ class _LocationPageState extends State<LocationPage> {
   @override
   void initState() {
     super.initState();
-    recuperationDeLaPositionDeLappareil();
+    getDevicePosition();
   }
 
   @override
@@ -122,7 +139,7 @@ class _LocationPageState extends State<LocationPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: recuperationDeLaPositionDeLappareil,
+        onPressed: getDevicePosition,
         child: const Icon(Icons.location_on),
       ),
     );

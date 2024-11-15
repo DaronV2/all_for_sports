@@ -3,13 +3,14 @@ import 'package:http/http.dart'; // https://docs.flutter.dev/cookbook/networking
 import 'dart:convert'; // Pour utiliser jsonDecode
 
 class Api {
+  // Focntion pour appeler l'api locale 
   static Future<Response> fetchApi(String apiPage) async {
     var url = Uri.http('127.0.0.1:30000', apiPage);
     return await http.get(url);
   }
 
   // Méthode pour extraire la référence du produit à partir du JSON
-  static String extractProductReference(String codeJsonPourAPI) {
+  static String extractProductReference(String codeJsonPourAPI) { // TODO expliquer code 
     // Décodage du JSON pour obtenir la map des données
     Map<String, dynamic> productData = jsonDecode(codeJsonPourAPI);
 
@@ -31,4 +32,18 @@ class Api {
       return messageErreur;
     }
   }
+
+  // Focntion pour simuler l'envoi à l'API 
+  static send(RequeteType req, String chaineJson){
+    if(req == RequeteType.get){
+      print("get : "+ chaineJson);
+    }else{
+      print("Post : "+ chaineJson);
+    }
+  }
+}
+
+enum RequeteType{
+  get,
+  post
 }

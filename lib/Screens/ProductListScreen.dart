@@ -1,11 +1,14 @@
+import 'package:all_for_sports/Screens/FlashQRCodeScreen.dart';
 import 'package:all_for_sports/Services/FillProductList.dart';
+import 'package:all_for_sports/Services/LoadingSceen.dart';
 import 'package:flutter/material.dart';
 import 'package:all_for_sports/Widget/ProductItem.dart';
 
 /// Classe `ProductListScreen`
 ///
 /// Ce widget représente l'écran affichant une liste de produits.
-/// Il utilise une source de données pour charger les informations des produits.
+/// L'utilisateur peut visualiser une liste de produits récupérés depuis une source de données
+/// et ajouter un nouveau produit en scannant un QR code.
 class ProductListScreen extends StatefulWidget {
   ProductListScreen({super.key});
 
@@ -15,72 +18,86 @@ class ProductListScreen extends StatefulWidget {
 
 /// Classe `_ProductListScreen`
 ///
-/// Cette classe gère l'état de l'écran de liste des produits.
-/// Elle contient la logique pour charger les données des produits et les afficher dans une liste.
+/// Gère l'état de l'écran de liste des produits.
+/// Contient la logique pour charger les produits et gérer les interactions utilisateur.
 class _ProductListScreen extends State<ProductListScreen> {
-  // Liste pour stocker les widgets `ProductItem` représentant chaque produit
-  List<ProductItem> listeProd = [];
+  /// Liste des widgets `ProductItem` qui représente les produits.
+  List<ProductItem> productList = [];
+
+  /// Variable pour afficher ou non l'écran de chargement (true = affiche le chargement).
+  bool isScreenLoading = true;
+
+  /// Variable pour afficher ou non la flèche de retour dans la barre d'application.
+  bool backArrow = false;
 
   /// Méthode `initState` :
-  ///
-  /// Cette méthode est appelée automatiquement lors de l'initialisation de l'état du widget.
-  /// Elle initialise la liste des produits en appelant `loadList`.
+  /// Appelée lors de l'initialisation de la page.
+  /// Charge la liste des produits en appelant la fonction `loadList`.
   @override
   void initState() {
     super.initState();
-    loadList(); // Appel de la fonction pour charger la liste de produits
+    loadList(); // Chargement de la liste des produits.
   }
 
   /// Méthode `loadList` :
   ///
-  /// Cette méthode charge les données des produits en appelant une méthode asynchrone
-  /// `FillProductList.loadProductList()`. Elle met à jour l'interface une fois les données chargées.
-  ///
-  /// Retourne :
-  /// - Un `Future<void>`, car la méthode est asynchrone.
+  /// Charge les produits via le service `FillProductList`.
+  /// Une fois les produits récupérés, met à jour l'état de la page pour les afficher.
   Future<void> loadList() async {
-    // Charge la liste des produits et l'assigne à `listeProd`
-    listeProd = await FillProductList.loadProductList();
-    print("los datas "); // Message de vérification dans la console
-
-    // Affiche chaque produit dans la console pour vérification
-    listeProd.forEach((data) {
-      print(data);
-    });
-
-    // Rafraîchit l'interface pour afficher les nouveaux produits chargés
-    setState(() {});
+    productList = await FillProductList.loadProductList();
+    isScreenLoading = false;
+    backArrow = true;
+    setState(() {}); // Met à jour l'interface utilisateur.
   }
 
   /// Méthode `build` :
   ///
-  /// Cette méthode construit l'interface utilisateur, qui contient une liste de produits.
-  ///
-  /// Paramètre :
-  /// - `context`: le contexte de construction du widget.
-  ///
-  /// Retourne :
-  /// - Un widget `Scaffold` contenant l'interface de la liste des produits.
+  /// Construit l'interface utilisateur de la liste des produits.
+  /// Affiche une liste déroulante des produits ou un écran de chargement si les données ne sont pas encore prêtes.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Titre dans la barre supérieure
+        // Titre de la page et gestion de la flèche de retour.
         title: const Text('Liste des produits'),
+        automaticallyImplyLeading: backArrow, // Affiche ou non la flèche.
       ),
       body: Center(
-        child: Stack(
-          children: [
-            // Utilisation de ListView.builder pour afficher et défiler la liste des produits
-            ListView.builder(
-              itemCount: listeProd.length, // Nombre d'éléments dans la liste
-              itemBuilder: (context, index) {
-                // Retourne chaque widget `ProductItem` de la liste
-                return listeProd[index];
-              },
-            ),
-          ],
-        ),
+        child: isScreenLoading
+            ? const LoadingScreen() // Affiche un écran de chargement si les données sont en cours de traitement.
+            : Stack(
+                children: [
+                  // Liste des produits affichée avec un défilement infini.
+                  ListView.builder(
+                    itemCount: productList.length,
+                    itemBuilder: (context, index) {
+                      return productList[index]; // Affiche chaque produit.
+                    },
+                  ),
+                  // Bouton flottant pour ajouter un nouveau produit.
+                  Positioned(
+                    bottom: 20.0,
+                    right: 20.0,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        // Ouvre l'écran pour scanner un QR code.
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const FlashQRCodeScreen(),
+                          ),
+                        );
+                      },
+                      backgroundColor: Colors.blue,
+                      tooltip: 'Ajouter un produit',
+                      child: const Icon(
+                        Icons.add,
+                        size: 40, // Taille de l'icône.
+                      ),
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
