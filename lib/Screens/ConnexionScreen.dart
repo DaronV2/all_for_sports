@@ -1,5 +1,4 @@
 import 'package:all_for_sports/Screens/ChoosingAWarehouseScreen.dart';
-import 'package:all_for_sports/Screens/WareHouseSelectionScreen.dart';
 import 'package:all_for_sports/Services/ConnexionProvider.dart';
 import 'package:all_for_sports/services/ConnexionTemp.dart';
 import 'package:all_for_sports/services/SerializeLogs.dart';
